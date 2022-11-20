@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  <div class="slide__show"></div>
+
+  <div class="block-pd discovery">
+    <div class="title">
+      <hr class="hr__underlay" />
+      <div class="d-flex justify-content-center">
+        <h1>DISCOVERY</h1>
+      </div>
+      <p>Satisfy your own shopping needs!</p>
+    </div>
+
+    <div class="container d-flex flex-row flex-wrap sub__discovery">
+      <div class="img__discovery">
+        <button class="btn-shop btn btn-primary rounded-5 fs-7 fw-bold">
+          SHOP SUIT
+        </button>
+        <img src="../../assets/img/discovery_1.jpg" alt="" />
+      </div>
+
+      <div class="img__discovery">
+        <button class="btn-shop btn btn-primary rounded-5 fs-7 fw-bold">
+          SHOP ACCESSORIES
+        </button>
+        <img src="../../assets/img/discovery_2.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <div class="block-pd best__seller">
+    <div class="title">
+      <hr class="hr__underlay" />
+      <div class="d-flex justify-content-evenly">
+        <h1>BEST SELLERS</h1>
+      </div>
+      <p>Get the inspired by our bestsellers and shop by your style!</p>
+    </div>
+  </div>
+
+  <div class="block-pd best__collection">
+    <div class="title">
+      <hr class="hr__underlay" />
+      <div class="d-flex justify-content-evenly">
+        <h1>BEST COLLECTION</h1>
+      </div>
+      <p>Choose your own style!</p>
+    </div>
+
+    <div class="container d-flex flex-row sub__best__collection">
+      <div class="left__item flex-grow-1 w-50 d-flex justify-content-center">
+        <img src="../../assets/img/item.jpg" alt="" />
+      </div>
+
+      <div
+        class="right__item d-flex w-50 flex-wrap gap-3 flex-grow-1 justify-content-center"
+      >
+        <img
+          *ngFor="let i of [1, 2, 3, 4]"
+          src="../../assets/img/item.jpg"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="block-pd new__products">
+    <div class="title">
+      <hr class="hr__underlay" />
+      <div class="d-flex justify-content-evenly">
+        <h1>NEW PRODUCTS</h1>
+      </div>
+      <p>It’s shopping time!</p>
+    </div>
+
+    <div class="all__items"></div>
+
+    <div class="shop__now">
+      <button class="btn-shop-now btn btn-primary rounded-5 fs-7 fw-bold">
+        SHOP NOW
+      </button>
+    </div>
+  </div>
+</div>

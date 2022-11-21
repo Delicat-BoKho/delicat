@@ -1,0 +1,41 @@
+/*===Item container===*/
+.item__container {
+  width: 262px !important;
+}
+
+.item > img {
+  width: 262px !important;
+  height: 400px !important;
+}
+
+.item {
+  position: relative;
+}
+
+.price__item {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 8px 30px;
+  background-color: var(--bs-secondary);
+}
+
+/*=================================================*/
+/* Info item*/
+.describe__item {
+  margin-top: 1rem;
+}
+
+.star > i {
+  color: #deab29;
+  margin: 0 4px;
+}
+
+.reviews {
+  margin-left: 10px;
+}
+
+.number__reviews {
+  font-weight: bold;
+  color: var(--bs-info);
+}

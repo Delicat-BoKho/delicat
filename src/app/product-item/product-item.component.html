@@ -1,0 +1,29 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+/>
+
+<div class="item__container d-flex flex-column">
+  <div class="item d-flex flex-column">
+    <img src="../../assets/img/item.jpg" alt="" />
+    <div class="price__item">
+      <span>$100.0</span>
+    </div>
+  </div>
+
+  <div class="info__item">
+    <p class="describe__item">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+    </p>
+
+    <div class="rating__item d-flex flex-row">
+      <div class="star">
+        <i *ngFor="let i of [1, 2, 3, 4, 5]" class="bi bi-star-fill"></i>
+      </div>
+
+      <div class="reviews">
+        <p class="number__reviews">5 reviews</p>
+      </div>
+    </div>
+  </div>
+</div>

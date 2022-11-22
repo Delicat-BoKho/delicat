@@ -85,9 +85,7 @@
   text-align: center;
   overflow: hidden;
 }
-.navbar {
-  display: none;
-}
+
 .navbar a {
   padding: 12px 12px;
   margin: 12px;
@@ -146,5 +144,8 @@
     display: block;
     float: right;
     padding: 0px 16px;
+  }
+  .navbar {
+    display: none;
   }
 }

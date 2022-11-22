@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <div class="slide__show"></div>
+<div class="container-fluid container__homepage">
+  <!-- <div class="slide__show"></div> -->
 
   <div class="block-pd discovery">
     <div class="title">
@@ -10,16 +10,20 @@
       <p>Satisfy your own shopping needs!</p>
     </div>
 
-    <div class="container d-flex flex-row flex-wrap sub__discovery">
+    <div class="sub__discovery container d-flex flex-row flex-wrap">
       <div class="img__discovery">
-        <button class="btn-shop btn btn-primary rounded-5 fs-7 fw-bold">
+        <button
+          class="btn-discovery btn-shop btn btn-primary rounded-5 fs-7 fw-bold"
+        >
           SHOP SUIT
         </button>
         <img src="../../assets/img/discovery_1.jpg" alt="" />
       </div>
 
       <div class="img__discovery">
-        <button class="btn-shop btn btn-primary rounded-5 fs-7 fw-bold">
+        <button
+          class="btn-discovery btn-shop btn btn-primary rounded-5 fs-7 fw-bold"
+        >
           SHOP ACCESSORIES
         </button>
         <img src="../../assets/img/discovery_2.jpg" alt="" />
@@ -33,7 +37,13 @@
       <div class="d-flex justify-content-evenly">
         <h1>BEST SELLERS</h1>
       </div>
-      <p>Get the inspired by our bestsellers and shop by your style!</p>
+      <p>Get the inspired by our bestsellers!</p>
+    </div>
+
+    <div
+      class="list_item_best_seller container d-flex justify-content-evenly flex-wrap"
+    >
+      <app-product-item *ngFor="let i of [1, 2, 3, 4]"></app-product-item>
     </div>
   </div>
 
@@ -51,14 +61,14 @@
         <img src="../../assets/img/item.jpg" alt="" />
       </div>
 
-      <div
-        class="right__item d-flex w-50 flex-wrap gap-3 flex-grow-1 justify-content-center"
-      >
-        <img
-          *ngFor="let i of [1, 2, 3, 4]"
-          src="../../assets/img/item.jpg"
-          alt=""
-        />
+      <div class="right__item d-flex w-50 flex-grow-1 justify-content-center">
+        <div class="d-flex flex-wrap gap-3 justify-content-center">
+          <img
+            *ngFor="let i of [1, 2, 3, 4]"
+            src="../../assets/img/item.jpg"
+            alt=""
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -72,10 +82,16 @@
       <p>It’s shopping time!</p>
     </div>
 
-    <div class="all__items"></div>
+    <div class="container all__items d-flex flex-wrap justify-content-evenly">
+      <app-product-item
+        *ngFor="
+          let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+        "
+      ></app-product-item>
+    </div>
 
     <div class="shop__now">
-      <button class="btn-shop-now btn btn-primary rounded-5 fs-7 fw-bold">
+      <button class="btn-shop btn btn-primary rounded-5 fs-7 fw-bold">
         SHOP NOW
       </button>
     </div>

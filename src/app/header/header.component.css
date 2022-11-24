@@ -53,7 +53,7 @@
 .container__heartCartUser {
   display: inline-block;
   width: 25%;
-  margin: 20px 0;
+  margin: 18px 0;
   overflow: hidden;
 }
 .container__heartCartUser a {
@@ -78,7 +78,7 @@
 .container__heartCartUser a:nth-child(4) {
   display: none;
 }
-.navbar {
+.navibar {
   background-color: #6c4f37;
   border-top: 1px solid #f3f1e4;
   height: 42px;
@@ -86,7 +86,7 @@
   overflow: hidden;
 }
 
-.navbar a {
+.navibar a {
   padding: 12px 12px;
   margin: 12px;
   font-size: 18px;
@@ -95,7 +95,7 @@
   line-height: 42px;
   font-weight: 550;
 }
-.navbar a:hover {
+.navibar a:hover {
   cursor: pointer;
   background-color: #f3f1e4;
   color: #6c4f37;
@@ -123,7 +123,7 @@
   }
   .container__heartCartUser {
     width: 33.33%;
-    margin: 12px 0px;
+    margin: 8px 0px;
   }
   .container__heartCartUser a:nth-child(1) {
     display: none;

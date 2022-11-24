@@ -1,5 +1,5 @@
-.container-fluid {
-  /* background-color: var(--bs-secondary); */
+.container__homepage {
+  padding: 0;
 }
 
 .container__homepage > div:nth-child(odd) {

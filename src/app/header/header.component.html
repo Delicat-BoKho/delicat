@@ -33,15 +33,76 @@
           <i class="bi bi-suit-heart" aria-hidden="true"></i>
         </a>
         <a href=""><i class="bi bi-cart" aria-hidden="true"></i></a>
-        <a href=""> <i class="bi bi-search" aria-hidden="true"></i> </a>
+        <a href="" id="seach_icon">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
   </div>
-  <nav class="navibar">
-    <a href="#home">HOME</a>
-    <a href="#Shop">SHOP</a>
-    <a href="#blog">BLOG</a>
-    <a href="#about">ABOUT</a>
-    <a href="#contact">CONTACT</a>
-  </nav>
+  <ul class="navibar">
+    <li>
+      <a href="#about">HOME</a>
+    </li>
+    <li class="navi_shop">
+      <a href="#about">SHOP</a>
+      <div class="subnavi_container">
+        <div class="subnavi_item">
+          <ul class="subnavi">
+            <li>
+              <a href=""><h4>SUITS</h4></a>
+            </li>
+            <li><a href="">Suting</a></li>
+            <li><a href="">Blazers</a></li>
+            <li><a href="">Shirts</a></li>
+            <li><a href="">Trousers</a></li>
+          </ul>
+        </div>
+        <div class="subnavi_item">
+          <ul class="subnavi">
+            <li>
+              <a href=""><h4>ACESSORIES</h4> </a>
+            </li>
+            <li>
+              <a href="">Shoes</a>
+            </li>
+            <li>
+              <a href="">Ties</a>
+            </li>
+            <li>
+              <a href="">Wallet</a>
+            </li>
+            <li>
+              <a href="">Watch</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li>
+      <a href="#menu">BLOG</a>
+    </li>
+    <li>
+      <a href="#products">ABOUT</a>
+    </li>
+    <li>
+      <a href="#review">CONTACT</a>
+    </li>
+  </ul>
+
+  <!-- search popup -->
+  <div class="container_search">
+    <div class="row height d-flex justify-content-center align-items-center">
+      <div class="col-md-8">
+        <div class="search">
+          <i class="fa fa-search"></i>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Have a question? Ask Now"
+          />
+          <button class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>

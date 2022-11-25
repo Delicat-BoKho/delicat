@@ -84,21 +84,73 @@
   height: 42px;
   text-align: center;
   overflow: hidden;
+  margin: 0px;
 }
-
-.navibar a {
-  padding: 12px 12px;
-  margin: 12px;
+.navibar > li {
+  display: inline-block;
+  width: 100px;
+}
+.navibar > li > a {
   font-size: 18px;
   color: #f3f1e4;
   text-decoration: none;
   line-height: 42px;
-  font-weight: 550;
+  padding: 0 16px;
+  display: inline-block;
 }
-.navibar a:hover {
+.navibar > li > a:hover {
   cursor: pointer;
   background-color: #f3f1e4;
   color: #6c4f37;
+}
+.subnavi > li:hover a {
+  cursor: pointer;
+  background-color: #6c4f37;
+  color: #f3f1e4;
+}
+.container_search {
+  display: none;
+  z-index: 1;
+}
+.subnavi {
+  list-style-type: none;
+  display: block;
+  min-width: 160px;
+  text-align: left;
+}
+.navbar li:hover .subnavi {
+  display: block;
+}
+.subnavi > li > a {
+  text-decoration: none;
+  display: block;
+  color: black;
+  padding: 4px;
+  font-size: 14px;
+}
+.subnavi h4 {
+  margin: 0px;
+  padding: 4px;
+  text-align: left;
+  margin-left: -4px;
+  font-size: 16px;
+}
+.subnavi_container {
+  display: flex;
+  display: none;
+  position: absolute;
+  background-color: #f3f1e4;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.subnavi_item {
+  flex: 1;
+}
+.subnavi_item > ul {
+  padding-left: 24px;
+}
+.navi_shop:hover .subnavi_container {
+  display: flex;
 }
 /* responsive */
 @media only screen and (max-width: 600px) {
@@ -112,17 +164,22 @@
 
   .header__logo {
     margin: 4px;
-    width: 33.33%;
+    width: 128px;
   }
+  #seach_icon:hover .container_search {
+    display: none;
+  }
+  /* css bar category */
   .mobile__category {
     display: block;
-    width: 33.33%;
+    width: 48px;
     text-align: center;
     margin: auto auto auto 20px;
     text-align: left;
   }
+  /* css icon bên phải  */
   .container__heartCartUser {
-    width: 33.33%;
+    width: calc(100% - 128px - 48px);
     margin: 8px 0px;
   }
   .container__heartCartUser a:nth-child(1) {
@@ -146,5 +203,44 @@
   }
   .navibar {
     display: none;
+  }
+
+  /* css search popup */
+  .container_search {
+    display: block;
+  }
+  .height {
+    height: 100vh;
+  }
+
+  .search {
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, 0.1);
+  }
+
+  .search input {
+    height: 60px;
+    text-indent: 25px;
+    border: 2px solid #d6d4d4;
+  }
+
+  .search input:focus {
+    box-shadow: none;
+    border: 2px solid blue;
+  }
+
+  .search .fa-search {
+    position: absolute;
+    top: 20px;
+    left: 16px;
+  }
+
+  .search button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 50px;
+    width: 110px;
+    background: blue;
   }
 }

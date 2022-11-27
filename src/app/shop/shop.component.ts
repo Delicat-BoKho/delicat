@@ -6,17 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor() { }
 
-  color = 'blue';
-  background = 'yellow';
-  changeColor() {
-    this.color = 'tomato';
-    this.background = 'teal';
+  ngOnInit(): void {
   }
-
-  currentImgHeight = '350px !important';
-  currentImgWidth = '225px !important';
 }

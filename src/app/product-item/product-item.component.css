@@ -1,11 +1,11 @@
 /*===Item container===*/
 .item__container {
-  width: 262px !important;
+  width: 225px !important;
 }
 
 .item > img {
-  width: 262px !important;
-  height: 400px !important;
+  width: 225px !important;
+  height: 350px !important;
 }
 
 .item {

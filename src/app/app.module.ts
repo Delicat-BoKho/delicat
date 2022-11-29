@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { BannerComponent } from './banner/banner.component';
+import { PolicyComponent } from './policy/policy.component';
 import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ShopComponent } from './shop/shop.component';
     HomePageComponent,
     ProductItemComponent,
     BannerComponent,
+    PolicyComponent,
     ShopComponent
   ],
   imports: [

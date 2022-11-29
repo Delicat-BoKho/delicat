@@ -1,11 +1,27 @@
 /*===Item container===*/
 .item__container {
-  width: 225px !important;
+  width: 225px;
+  height: auto;
 }
 
-.item > img {
-  width: 225px !important;
-  height: 350px !important;
+.itemImg {
+  width: 225px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .item__container {
+    width: 180px;
+  }
+
+  .itemImg {
+    width: 180px;
+    height: auto;
+  }
+
+  .star > i {
+    font-size: 12px;
+  }
 }
 
 .item {
@@ -28,7 +44,7 @@
 
 .star > i {
   color: #deab29;
-  margin: 0 4px;
+  margin: 0 3px;
 }
 
 .reviews {
@@ -38,4 +54,5 @@
 .number__reviews {
   font-weight: bold;
   color: var(--bs-info);
+  margin: 0;
 }

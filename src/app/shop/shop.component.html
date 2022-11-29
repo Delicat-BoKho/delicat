@@ -19,8 +19,9 @@
           </h2>
           <div
             id="panelsStayOpen-collapseOne"
-            class="accordion-collapse collapse show"
+            class="accordion-collapse collapse"
             aria-labelledby="panelsStayOpen-headingOne"
+            [ngClass]="{ show: checkSize }"
           >
             <div class="accordion-body">
               <div class="form-check">
@@ -90,8 +91,9 @@
           </h2>
           <div
             id="panelsStayOpen-collapseTwo"
-            class="accordion-collapse collapse show"
+            class="accordion-collapse collapse"
             aria-labelledby="panelsStayOpen-headingTwo"
+            [ngClass]="{ show: checkSize }"
           >
             <div class="accordion-body">
               <div class="form-check">
@@ -149,8 +151,9 @@
           </h2>
           <div
             id="panelsStayOpen-collapseThree"
-            class="accordion-collapse collapse show"
+            class="accordion-collapse collapse"
             aria-labelledby="panelsStayOpen-headingThree"
+            [ngClass]="{ show: checkSize }"
           >
             <div class="accordion-body d-flex flex-wrap justify-content-evenly">
               <div>
@@ -342,8 +345,9 @@
           </h2>
           <div
             id="panelsStayOpen-collapseFour"
-            class="accordion-collapse collapse show"
+            class="accordion-collapse collapse"
             aria-labelledby="panelsStayOpen-headingFour"
+            [ngClass]="{ show: checkSize }"
           >
             <div
               class="accordion-body all__colors d-flex flex-wrap justify-content-between"
@@ -427,8 +431,9 @@
           </h2>
           <div
             id="panelsStayOpen-collapseFive"
-            class="accordion-collapse collapse show"
+            class="accordion-collapse collapse"
             aria-labelledby="panelsStayOpen-headingFive"
+            [ngClass]="{ show: checkSize }"
           >
             <div class="accordion-body">
               <div class="d-flex justify-content-between w-100">
@@ -587,11 +592,10 @@
             let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
           "
         ></app-product-item>
+
+        <!-- <app-product-item *ngFor="let item of listItems"></app-product-item> -->
       </div>
     </div>
   </div>
-
-  <!-- <h1 [style.color]="color" [style.background]="background">Nhật Nguyên</h1>
-  
-    <button class="btn btn-primary" (click)="changeColor()">Load Json</button> -->
+  <button (click)="loadListItems()">Load Data</button>
 </div>

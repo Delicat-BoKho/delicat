@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Antique Rogue Slim Fit Black Velvet",
+    "price": 15000,
+    "imgURL": "",
+    "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
+    "tag": "Shoes",
+    "size": {
+      "6": 5,
+      "7": 4,
+      "8": 1,
+      "9": 0,
+      "10": 0,
+      "11": 0
+    },
+    "color": "red",
+    "reviews": {
+      "ratingStar": 4,
+      "countReviews": 5
+    },
+    "dateOnSales": ""
+  }
+]

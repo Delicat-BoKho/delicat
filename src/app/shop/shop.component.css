@@ -4,6 +4,10 @@
 .container > h2 {
   margin-top: 2.5rem;
 }
+
+.container {
+  max-width: 90%;
+}
 /*=================================================*/
 
 /* Left */
@@ -100,13 +104,13 @@ hr {
   background-color: white;
 }
 
-.header__right__content {
+/* .header__right__content {
   padding: 0 2rem;
-}
+} */
 
-.list__item {
+/* .list__item {
   margin: 0 1.5rem;
-}
+} */
 
 .list__item > * {
   margin-bottom: 1.5rem;
@@ -127,5 +131,19 @@ hr {
 
   .left__filter {
     margin-top: 0;
+  }
+
+  .sort__item {
+    margin: 1.5rem 0 0 0;
+  }
+
+  .list__item {
+    justify-content: space-around !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .list__item {
+    justify-content: center !important;
   }
 }

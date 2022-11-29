@@ -124,11 +124,12 @@ h1 {
 
 .all__items > * {
   margin-bottom: 1.5rem;
+  margin-right: 2.5rem;
 }
 
 /*=================================================*/
 /* RESPONSIVE */
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1024px) {
   /* Best sellers */
   .btn-shop {
     width: 150px;
@@ -183,5 +184,9 @@ h1 {
   .left__item > img {
     width: 262px !important;
     height: 400px !important;
+  }
+
+  .all__items > * {
+    margin-right: 0;
   }
 }

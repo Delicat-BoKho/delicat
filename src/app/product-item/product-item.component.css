@@ -42,8 +42,13 @@
   margin-top: 1rem;
 }
 
-.star > i {
+.star > i#starYellow {
   color: #deab29;
+  margin: 0 3px;
+}
+
+.star > i#starGray {
+  color: grey;
   margin: 0 3px;
 }
 

@@ -1,8 +1,72 @@
 [
   {
+    "id": "S001",
     "name": "Antique Rogue Slim Fit Black Velvet",
     "price": 15000,
-    "imgURL": "",
+    "imgURL": "discovery_2.jpg",
+    "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
+    "tag": "suiting",
+    "size": {
+      "S": 5,
+      "M": 4,
+      "L": 1,
+      "XL": 0,
+      "XXL": 0,
+      "XXXL": 0
+    },
+    "color": "red",
+    "reviews": {
+      "ratingStar": 4,
+      "countReviews": 5
+    }
+  },
+  {
+    "id": "S002",
+    "name": "Antique Rogue Slim Fit Black Velvet",
+    "price": 21000,
+    "imgURL": "discovery_1.jpg",
+    "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
+    "tag": "suiting",
+    "size": {
+      "S": 5,
+      "M": 4,
+      "L": 1,
+      "XL": 0,
+      "XXL": 0,
+      "XXXL": 0
+    },
+    "color": "red",
+    "reviews": {
+      "ratingStar": 4,
+      "countReviews": 3
+    }
+  },
+  {
+    "id": "S003",
+    "name": "Antique Rogue Slim Fit Black Velvet",
+    "price": 65000,
+    "imgURL": "discovery_2.jpg",
+    "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
+    "tag": "Blazers",
+    "size": {
+      "S": 5,
+      "M": 4,
+      "L": 1,
+      "XL": 0,
+      "XXL": 0,
+      "XXXL": 0
+    },
+    "color": "red",
+    "reviews": {
+      "ratingStar": 4,
+      "countReviews": 5
+    }
+  },
+  {
+    "id": "S004",
+    "name": "Antique Rogue Slim Fit Black Velvet",
+    "price": 14800,
+    "imgURL": "discovery_1.jpg",
     "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
     "tag": "Suiting",
     "size": {
@@ -20,10 +84,12 @@
     }
   },
   {
+    "id": "S005",
     "name": "Antique Rogue Slim Fit Black Velvet",
-    "price": 15000,
+    "price": 36000,
+    "imgURL": "item.jpg",
     "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
-    "tag": "Suiting",
+    "tag": "Shirts",
     "size": {
       "S": 5,
       "M": 4,
@@ -39,48 +105,12 @@
     }
   },
   {
+    "id": "S006",
     "name": "Antique Rogue Slim Fit Black Velvet",
     "price": 15000,
+    "imgURL": "discovery_1.jpg",
     "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
-    "tag": "Suiting",
-    "size": {
-      "S": 5,
-      "M": 4,
-      "L": 1,
-      "XL": 0,
-      "XXL": 0,
-      "XXXL": 0
-    },
-    "color": "red",
-    "reviews": {
-      "ratingStar": 4,
-      "countReviews": 5
-    }
-  },
-  {
-    "name": "Antique Rogue Slim Fit Black Velvet",
-    "price": 15000,
-    "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
-    "tag": "Suiting",
-    "size": {
-      "S": 5,
-      "M": 4,
-      "L": 1,
-      "XL": 0,
-      "XXL": 0,
-      "XXXL": 0
-    },
-    "color": "red",
-    "reviews": {
-      "ratingStar": 4,
-      "countReviews": 5
-    }
-  },
-  {
-    "name": "Antique Rogue Slim Fit Black Velvet",
-    "price": 15000,
-    "describe": "Break tradition and style your suit with the Limehaus Tux Waistcoat or stand out from the crowd in the Racing Green Double Breasted Scoop Waistcoat.",
-    "tag": "Suiting",
+    "tag": "Trousers",
     "size": {
       "S": 5,
       "M": 4,

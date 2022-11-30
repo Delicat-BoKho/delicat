@@ -21,6 +21,12 @@ export class ShopComponent implements OnInit {
 
   listItems: any[] = [];
 
+  templistItems: any[] = [];
+
+  arrayFilter: string[] = [];
+
+  checkTag!: boolean;
+
   async loadListItems() {
     let jsonItems = await fetch('../../assets/data/products_suit.json')
       .then(function (response) {
@@ -36,6 +42,37 @@ export class ShopComponent implements OnInit {
       });
 
     this.listItems = jsonItems;
-    console.log(this.listItems);
+
+    // Gán mảng tạm để filter
+    this.templistItems = this.listItems;
+  }
+
+  filter(event: Event, stringFilter: string) {
+    if ((event.target as HTMLInputElement).checked) {
+      if (!this.arrayFilter.includes(stringFilter)) {
+        this.arrayFilter.push(stringFilter);
+      }
+    } else {
+      // Xóa phần tử (Remove item)
+      console.log(this.arrayFilter);
+
+      this.arrayFilter.splice(this.arrayFilter.indexOf(stringFilter), 1);
+      console.log(this.arrayFilter);
+    }
+
+    if (this.arrayFilter.length == 0) {
+      this.templistItems = this.listItems;
+      return;
+    }
+
+    this.templistItems = [];
+
+    this.arrayFilter.forEach((itemFilter) => {
+      this.templistItems = this.templistItems.concat(
+        this.listItems.filter((product) => {
+          return product.tag == itemFilter;
+        })
+      );
+    });
   }
 }

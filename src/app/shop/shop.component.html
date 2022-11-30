@@ -30,6 +30,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-Suiting"
+                  (click)="filter($event, 'suiting')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-Suiting">
                   Suiting
@@ -42,6 +43,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-Blazers"
+                  (click)="filter($event, 'Blazers')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-Blazers">
                   Blazers
@@ -587,13 +589,16 @@
       </div>
 
       <div class="list__item d-flex flex-wrap justify-content-between">
-        <app-product-item
+        <!-- <app-product-item
           *ngFor="
             let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
           "
-        ></app-product-item>
+        ></app-product-item> -->
 
-        <!-- <app-product-item *ngFor="let item of listItems"></app-product-item> -->
+        <app-product-item
+          *ngFor="let item of templistItems"
+          [productDetail]="item"
+        ></app-product-item>
       </div>
     </div>
   </div>

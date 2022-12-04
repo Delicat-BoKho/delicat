@@ -1,5 +1,8 @@
 import { JsonPipe } from '@angular/common';
+import { TagContentType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ProductModel } from 'src/models/product-model';
+import { ApiService } from 'src/services/api.service';
 
 @Component({
   selector: 'app-shop',
@@ -9,7 +12,14 @@ import { Component, OnInit } from '@angular/core';
 export class ShopComponent implements OnInit {
   checkSize!: boolean;
 
-  constructor() {}
+  //Test
+  templistItemsPrice: ProductModel[] = [];
+
+  checkFirstFilter: boolean = true;
+
+  previousPriceFilter: number = 0;
+
+  constructor(private api: ApiService) {}
 
   ngOnInit(): void {
     if (window.innerWidth < 1024) {
@@ -17,62 +27,137 @@ export class ShopComponent implements OnInit {
     } else {
       this.checkSize = true;
     }
+
+    this.arrayFilter.set('size', []);
+    this.arrayFilter.set('color', []);
+    this.arrayFilter.set('tag', []);
+
+    this.loadListItems();
   }
 
-  listItems: any[] = [];
+  listItems: ProductModel[] = [];
 
-  templistItems: any[] = [];
+  templistItems: ProductModel[] = [];
 
-  arrayFilter: string[] = [];
+  arrayFilter: Map<string, string[]> = new Map<string, string[]>();
 
   checkTag!: boolean;
 
   async loadListItems() {
-    let jsonItems = await fetch('../../assets/data/products_suit.json')
-      .then(function (response) {
-        if (!response.ok) {
-          throw new Error('Sai' + response.status);
-        }
-        return response.json();
-      })
-      .then(function (json) {
-        // console.log(json);
+    let jsonItemsSuit = await this.api.loadDataJson(
+      '../../assets/data/products_suit.json'
+    );
 
-        return json;
-      });
+    let jsonItemsAccessories = await this.api.loadDataJson(
+      '../../assets/data/products_accessories.json'
+    );
 
-    this.listItems = jsonItems;
+    this.listItems = jsonItemsSuit.concat(jsonItemsAccessories);
 
     // Gán mảng tạm để filter
     this.templistItems = this.listItems;
   }
 
-  filter(event: Event, stringFilter: string) {
+  filter(event: Event, stringFilter: string, typeFilter: string) {
+    if (typeFilter == 'price') {
+      if (this.checkFirstFilter) {
+        this.templistItemsPrice = this.listItems.filter((product) => {
+          if (product.price <= Number(stringFilter)) {
+            return true;
+          }
+          return false;
+        });
+        this.checkFirstFilter = false;
+        this.templistItems = this.templistItemsPrice;
+        this.previousPriceFilter = Number(stringFilter);
+        return;
+      } else {
+        this.templistItemsPrice = this.listItems.filter((product) => {
+          if (product.price <= Number(stringFilter)) {
+            return true;
+          }
+          return false;
+        });
+
+        if (this.previousPriceFilter > Number(stringFilter)) {
+          this.templistItems = this.templistItems
+            .concat(this.templistItemsPrice)
+            .filter((value, index, self) => self.indexOf(value) !== index);
+          return;
+        } else {
+          this.templistItems = this.templistItems
+            .concat(this.templistItemsPrice)
+            .filter((value, index, self) => self.indexOf(value) === index);
+          return;
+        }
+      }
+    }
+    this.checkFirstFilter = false;
+
+    let includeFilter: boolean = this.arrayFilter
+      .get(typeFilter)!
+      .includes(stringFilter);
+
     if ((event.target as HTMLInputElement).checked) {
-      if (!this.arrayFilter.includes(stringFilter)) {
-        this.arrayFilter.push(stringFilter);
+      if (!includeFilter) {
+        this.arrayFilter.get(typeFilter)!.push(stringFilter);
       }
     } else {
-      // Xóa phần tử (Remove item)
-      console.log(this.arrayFilter);
-
-      this.arrayFilter.splice(this.arrayFilter.indexOf(stringFilter), 1);
-      console.log(this.arrayFilter);
+      this.arrayFilter
+        .get(typeFilter)
+        ?.splice(this.arrayFilter.get(typeFilter)!.indexOf(stringFilter), 1);
     }
-
-    if (this.arrayFilter.length == 0) {
-      this.templistItems = this.listItems;
-      return;
-    }
+    // console.log('array filter: ', this.arrayFilter);
 
     this.templistItems = [];
 
-    this.arrayFilter.forEach((itemFilter) => {
-      this.templistItems = this.templistItems.concat(
-        this.listItems.filter((product) => {
-          return product.tag == itemFilter;
-        })
-      );
+    /* Mã giả
+    foreach i in list:
+      if filter: i == true then
+        arr.push(i)
+      return arr
+    */
+
+    // Xử lý filter
+    this.templistItems = this.listItems.filter((product) => {
+      let result: boolean = true;
+      [...this.arrayFilter.keys()].forEach((k) => {
+        // console.log(
+        //   'product.' + k + ' = ',
+        //   product[k as keyof ProductModel] as string
+        // );
+        if (this.arrayFilter.get(k)!.length > 0) {
+          if (typeof product[k as keyof ProductModel] === 'string') {
+            if (
+              !this.arrayFilter
+                .get(k)!
+                .includes(product[k as keyof ProductModel] as string)
+            ) {
+              result = false;
+              return;
+            }
+          } else {
+            let valueProps = product[k as keyof ProductModel] as string[];
+            let matchCount: number = 0;
+            this.arrayFilter.get(k)!.forEach((f) => {
+              if (valueProps.includes(f)) {
+                matchCount++;
+              }
+            });
+            if (matchCount <= 0) {
+              result = false;
+              return;
+            }
+          }
+        }
+      });
+      return result;
     });
+
+    // this.templistItems = this.templistItems.filter(
+    //   (value, index, self) => self.indexOf(value) !== index
+    // );
+
+    // console.log(this.templistItems);
   }
 }

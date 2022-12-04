@@ -12,9 +12,9 @@
 
 /* Left */
 .left__filter {
-  /* min-width: 250px; */
   margin-top: 5rem;
-  max-width: 250px;
+  width: 250px;
+  min-width: 250px;
 }
 
 .left__filter
@@ -132,6 +132,7 @@ hr {
 
   .left__filter {
     margin-top: 0;
+    width: 100%;
   }
 
   .sort__item {

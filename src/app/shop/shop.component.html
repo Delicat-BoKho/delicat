@@ -30,7 +30,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-Suiting"
-                  (click)="filter($event, 'suiting')"
+                  (click)="filter($event, 'suiting', 'tag')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-Suiting">
                   Suiting
@@ -43,7 +43,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-Blazers"
-                  (click)="filter($event, 'Blazers')"
+                  (click)="filter($event, 'blazers', 'tag')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-Blazers">
                   Blazers
@@ -56,6 +56,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-Shirts"
+                  (click)="filter($event, 'shirts', 'tag')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-Shirts">
                   Shirts
@@ -68,6 +69,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-Trousers"
+                  (click)="filter($event, 'trousers', 'tag')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-Trousers">
                   Trousers
@@ -104,6 +106,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckDefault-Shoes"
+                  (click)="filter($event, 'shoes', 'tag')"
                 />
                 <label class="form-check-label" for="flexCheckDefault-Shoes">
                   Shoes
@@ -116,6 +119,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckDefault-Ties"
+                  (click)="filter($event, 'ties', 'tag')"
                 />
                 <label class="form-check-label" for="flexCheckDefault-Ties">
                   Ties
@@ -128,6 +132,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckDefault-Belts"
+                  (click)="filter($event, 'belts', 'tag')"
                 />
                 <label class="form-check-label" for="flexCheckDefault-Belts">
                   Belts
@@ -164,6 +169,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-S"
                   autocomplete="off"
+                  (click)="filter($event, 'S', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -178,6 +184,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-M"
                   autocomplete="off"
+                  (click)="filter($event, 'M', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -192,6 +199,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-L"
                   autocomplete="off"
+                  (click)="filter($event, 'L', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -206,6 +214,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-XL"
                   autocomplete="off"
+                  (click)="filter($event, 'XL', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -220,6 +229,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-XXL"
                   autocomplete="off"
+                  (click)="filter($event, 'XXL', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -234,6 +244,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-XXXL"
                   autocomplete="off"
+                  (click)="filter($event, 'XXXL', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -250,6 +261,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-6"
                   autocomplete="off"
+                  (click)="filter($event, '6', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -264,6 +276,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-7"
                   autocomplete="off"
+                  (click)="filter($event, '7', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -278,6 +291,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-8"
                   autocomplete="off"
+                  (click)="filter($event, '8', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -292,6 +306,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-9"
                   autocomplete="off"
+                  (click)="filter($event, '9', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -306,6 +321,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-10"
                   autocomplete="off"
+                  (click)="filter($event, '10', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -320,6 +336,7 @@
                   class="btn-check"
                   id="btn-check-2-outlined-11"
                   autocomplete="off"
+                  (click)="filter($event, '11', 'size')"
                 />
                 <label
                   class="btn btn-outline-primary"
@@ -360,6 +377,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-red"
+                  (click)="filter($event, 'red', 'color')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-red">
                   Red
@@ -372,6 +390,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-cream"
+                  (click)="filter($event, 'cream', 'color')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-cream">
                   Cream
@@ -384,6 +403,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-green"
+                  (click)="filter($event, 'green', 'color')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-green">
                   Green
@@ -396,6 +416,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-brown"
+                  (click)="filter($event, 'brown', 'color')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-brown">
                   Brown
@@ -408,6 +429,7 @@
                   type="checkbox"
                   value=""
                   id="flexCheckChecked-gray"
+                  (click)="filter($event, 'gray', 'color')"
                 />
                 <label class="form-check-label" for="flexCheckChecked-gray">
                   Gray
@@ -444,114 +466,18 @@
                   type="range"
                   class="form-range"
                   min="0"
-                  max="500"
+                  max="5000"
                   id="customRange1"
-                  value="500"
+                  value="5000"
                   oninput="rangeValue.innerText = '$' + this.value"
                   style="padding: 0; width: 65%"
-                  data-slider-value="[0,500]"
+                  data-slider-value="[0,5000]"
+                  #priceFilter
+                  (change)="filter($event, priceFilter.value, 'price')"
                 />
 
-                <label id="rangeValue" style="width: 30px">$500</label>
+                <label id="rangeValue" style="width: 30px">$5000</label>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex all__tags flex-wrap flex-row">
-        <!--Tag mẫu-->
-        <div class="toast show">
-          <div class="d-flex">
-            <div
-              class="toast-body d-flex justify-content-between"
-              style="width: 100%"
-            >
-              Suiting
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="toast"
-              ></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="toast show">
-          <div class="d-flex">
-            <div
-              class="toast-body d-flex justify-content-between"
-              style="width: 100%"
-            >
-              Suiting
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="toast"
-              ></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="toast show">
-          <div class="d-flex">
-            <div
-              class="toast-body d-flex justify-content-between"
-              style="width: 100%"
-            >
-              Suiting
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="toast"
-              ></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="toast show">
-          <div class="d-flex">
-            <div
-              class="toast-body d-flex justify-content-between"
-              style="width: 100%"
-            >
-              Suiting
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="toast"
-              ></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="toast show">
-          <div class="d-flex">
-            <div
-              class="toast-body d-flex justify-content-between"
-              style="width: 100%"
-            >
-              Suiting
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="toast"
-              ></button>
-            </div>
-          </div>
-        </div>
-        <div class="toast show">
-          <div class="d-flex">
-            <div
-              class="toast-body d-flex justify-content-between"
-              style="width: 100%"
-            >
-              Suiting
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="toast"
-              ></button>
             </div>
           </div>
         </div>
@@ -588,7 +514,7 @@
         </div>
       </div>
 
-      <div class="list__item d-flex flex-wrap justify-content-between">
+      <div class="list__item d-flex flex-wrap">
         <!-- <app-product-item
           *ngFor="
             let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
@@ -602,5 +528,4 @@
       </div>
     </div>
   </div>
-  <button (click)="loadListItems()">Load Data</button>
 </div>

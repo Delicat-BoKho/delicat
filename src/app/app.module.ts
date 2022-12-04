@@ -10,6 +10,11 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { BannerComponent } from './banner/banner.component';
 import { PolicyComponent } from './policy/policy.component';
 import { ShopComponent } from './shop/shop.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,12 @@ import { ShopComponent } from './shop/shop.component';
     ProductItemComponent,
     BannerComponent,
     PolicyComponent,
-    ShopComponent
+    ShopComponent,
+    LoginComponent,
+    SignUpComponent,
+    AboutUsComponent,
+    ProductDetailComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

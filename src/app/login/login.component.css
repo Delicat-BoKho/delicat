@@ -18,7 +18,7 @@
 }
 
 .form-control{
-    background-color: var(#e5d1bf);
+    background-color: var(--bs-secondary);
 }
 
 .form-register{
@@ -62,7 +62,7 @@
 }
 
 .division span {
-    color: #424242;
+    color: black;
     font-size: 17px;
 }
 

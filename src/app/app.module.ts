@@ -15,6 +15,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { PaymentComponent } from './payment/payment.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { BasketComponent } from './basket/basket.component';
+import { ReviewDetailComponent } from './review-detail/review-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { PaymentComponent } from './payment/payment.component';
     SignUpComponent,
     AboutUsComponent,
     ProductDetailComponent,
-    PaymentComponent
+    PaymentComponent,
+    BlogDetailComponent,
+    ForgotPasswordComponent,
+    BasketComponent,
+    ReviewDetailComponent
   ],
   imports: [
     BrowserModule,

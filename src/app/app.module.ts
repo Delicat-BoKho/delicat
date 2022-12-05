@@ -15,6 +15,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { PaymentComponent } from './payment/payment.component';
+import { BlogComponent } from './blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PaymentComponent } from './payment/payment.component';
     SignUpComponent,
     AboutUsComponent,
     ProductDetailComponent,
-    PaymentComponent
+    PaymentComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,8 @@
     <img
       alt=""
       class="itemImg"
-      [src]="'../../assets/img/' + productDetail.imgURL"
+      [src]="'../../assets/img/' + productDetail.imgURL[0]"
+      loading="lazy"
     />
 
     <div class="price__item">
@@ -31,7 +32,7 @@
 
       <div class="reviews">
         <p class="number__reviews">
-          {{ productDetail.reviews.countReviews }} reviews
+          {{ productDetail.reviews.countReviews + "reviews" }}
         </p>
       </div>
     </div>

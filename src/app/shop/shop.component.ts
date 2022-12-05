@@ -1,3 +1,4 @@
+import { keyframes } from '@angular/animations';
 import { JsonPipe } from '@angular/common';
 import { TagContentType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +18,17 @@ export class ShopComponent implements OnInit {
 
   checkFirstFilter: boolean = true;
 
-  previousPriceFilter: number = 0;
+  previousPriceFilter: number = 5000;
+
+  sortFlag: 'asc' | 'des' = 'asc';
+
+  listItems: ProductModel[] = [];
+
+  templistItems: ProductModel[] = [];
+
+  templistItemsFinal: ProductModel[] = [];
+
+  arrayFilter: Map<string, string[]> = new Map<string, string[]>();
 
   constructor(private api: ApiService) {}
 
@@ -35,13 +46,7 @@ export class ShopComponent implements OnInit {
     this.loadListItems();
   }
 
-  listItems: ProductModel[] = [];
-
-  templistItems: ProductModel[] = [];
-
-  arrayFilter: Map<string, string[]> = new Map<string, string[]>();
-
-  checkTag!: boolean;
+  // checkTag!: boolean;
 
   async loadListItems() {
     let jsonItemsSuit = await this.api.loadDataJson(
@@ -56,44 +61,10 @@ export class ShopComponent implements OnInit {
 
     // Gán mảng tạm để filter
     this.templistItems = this.listItems;
+    this.templistItemsFinal = this.listItems;
   }
 
   filter(event: Event, stringFilter: string, typeFilter: string) {
-    if (typeFilter == 'price') {
-      if (this.checkFirstFilter) {
-        this.templistItemsPrice = this.listItems.filter((product) => {
-          if (product.price <= Number(stringFilter)) {
-            return true;
-          }
-          return false;
-        });
-        this.checkFirstFilter = false;
-        this.templistItems = this.templistItemsPrice;
-        this.previousPriceFilter = Number(stringFilter);
-        return;
-      } else {
-        this.templistItemsPrice = this.listItems.filter((product) => {
-          if (product.price <= Number(stringFilter)) {
-            return true;
-          }
-          return false;
-        });
-
-        if (this.previousPriceFilter > Number(stringFilter)) {
-          this.templistItems = this.templistItems
-            .concat(this.templistItemsPrice)
-            .filter((value, index, self) => self.indexOf(value) !== index);
-          return;
-        } else {
-          this.templistItems = this.templistItems
-            .concat(this.templistItemsPrice)
-            .filter((value, index, self) => self.indexOf(value) === index);
-          return;
-        }
-      }
-    }
-    this.checkFirstFilter = false;
-
     let includeFilter: boolean = this.arrayFilter
       .get(typeFilter)!
       .includes(stringFilter);
@@ -119,45 +90,74 @@ export class ShopComponent implements OnInit {
     */
 
     // Xử lý filter
+
     this.templistItems = this.listItems.filter((product) => {
       let result: boolean = true;
       [...this.arrayFilter.keys()].forEach((k) => {
-        // console.log(
-        //   'product.' + k + ' = ',
-        //   product[k as keyof ProductModel] as string
-        // );
         if (this.arrayFilter.get(k)!.length > 0) {
-          if (typeof product[k as keyof ProductModel] === 'string') {
-            if (
-              !this.arrayFilter
-                .get(k)!
-                .includes(product[k as keyof ProductModel] as string)
-            ) {
-              result = false;
-              return;
-            }
-          } else {
-            let valueProps = product[k as keyof ProductModel] as string[];
-            let matchCount: number = 0;
-            this.arrayFilter.get(k)!.forEach((f) => {
-              if (valueProps.includes(f)) {
-                matchCount++;
+          switch (typeof product[k as keyof ProductModel]) {
+            case 'string':
+              if (
+                !this.arrayFilter
+                  .get(k)!
+                  .includes(product[k as keyof ProductModel] as string)
+              ) {
+                result = false;
+                return;
               }
-            });
-            if (matchCount <= 0) {
-              result = false;
-              return;
-            }
+              break;
+            case 'number':
+              break;
+            default:
+              let valueProps = product[k as keyof ProductModel] as string[];
+              let matchCount: number = 0;
+              this.arrayFilter.get(k)!.forEach((f) => {
+                if (valueProps.includes(f)) {
+                  matchCount++;
+                }
+              });
+              if (matchCount <= 0) {
+                result = false;
+                return;
+              }
+              break;
           }
         }
       });
+      this.checkFirstFilter = false;
       return result;
     });
 
-    // this.templistItems = this.templistItems.filter(
-    //   (value, index, self) => self.indexOf(value) !== index
-    // );
+    this.filterPrice(this.previousPriceFilter.toString());
+  }
 
-    // console.log(this.templistItems);
+  filterPrice(price: string) {
+    this.previousPriceFilter = Number(price);
+    console.log(this.previousPriceFilter.toString());
+    this.templistItemsFinal = this.templistItems.filter(
+      (p) => p.price <= this.previousPriceFilter
+    );
+    switch (this.sortFlag) {
+      case 'asc':
+        this.orderByPrice();
+        break;
+      case 'des':
+        this.orderDescByPrice();
+        break;
+    }
+  }
+
+  orderByPrice() {
+    this.sortFlag = 'asc';
+    this.templistItemsFinal = this.templistItemsFinal.sort(
+      (a, b) => a.price - b.price
+    );
+  }
+
+  orderDescByPrice() {
+    this.sortFlag = 'des';
+    this.templistItemsFinal = this.templistItemsFinal.sort(
+      (a, b) => (a.price - b.price) * -1
+    );
   }
 }

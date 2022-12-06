@@ -4,6 +4,14 @@
   height: auto;
 }
 
+.item__container:hover {
+  cursor: pointer;
+}
+
+.item__container:hover .item img {
+  opacity: 0.5;
+}
+
 .itemImg {
   width: 225px;
   height: auto;

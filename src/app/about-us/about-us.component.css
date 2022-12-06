@@ -10,7 +10,7 @@
   position: relative;
   width: 100%;
   text-align: center;
-  background-image: url(./banner_aboutus.jpg);
+  background-image: url(../../assets/img/banner.png);
   height: 320px;
   background-size: cover;
   background-position: top;
@@ -54,8 +54,9 @@
 }
 
 .aboutUs__introduce_item > img {
-  width: 70%;
+  width: 100%;
   min-width: 180px;
+  opacity: 0.9;
 }
 .aboutUs__members {
   background-color: #e5d1bf;

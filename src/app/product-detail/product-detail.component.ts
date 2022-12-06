@@ -25,9 +25,15 @@ export class ProductDetailComponent implements OnInit {
     };
 
     this.mainImg = '../../assets/img/' + this.productDetail.imgURL;
+    this.subImg_0 = '../../assets/img/' + this.product.imgURL[0];
+    this.subImg_1 = '../../assets/img/' + this.product.imgURL[1];
+    this.subImg_2 = '../../assets/img/' + this.product.imgURL[2];
   }
 
   mainImg: string = '';
+  subImg_0: string = '';
+  subImg_1: string = '';
+  subImg_2: string = '';
 
   product!: ProductModel;
 

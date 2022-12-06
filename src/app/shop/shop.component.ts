@@ -18,7 +18,7 @@ export class ShopComponent implements OnInit {
 
   checkFirstFilter: boolean = true;
 
-  previousPriceFilter: number = 5000;
+  previousPriceFilter: number = 500;
 
   sortFlag: 'asc' | 'des' = 'asc';
 

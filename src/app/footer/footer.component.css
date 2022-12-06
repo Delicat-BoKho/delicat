@@ -91,8 +91,7 @@ ul {
   color: #f3f1e4;
   padding-left: 8px;
 }
-.footer-col .social-links a,
-.footer-col .payment-links a {
+.footer-col .social-links a {
   display: inline-block;
   height: 40px;
   width: 40px;
@@ -105,14 +104,28 @@ ul {
   color: #f3f1e4;
   transition: all 0.5s ease;
 }
+.bocongthuong-desktop a img {
+  width: 200px;
+}
 
-.footer-col .social-links a:hover,
-.footer-col .payment-links a:hover {
+.footer-col .social-links a:hover {
   color: #24262b;
   background-color: #f3f1e4;
 }
 .payment-links {
   padding-bottom: 32px;
+}
+.payment-links a {
+  margin-left: 5px;
+}
+.payment-links a:first-child img {
+  background-color: white;
+  height: 30px;
+  border-radius: 2px;
+}
+.payment-links a img {
+  width: 50px;
+  margin-bottom: 5px;
 }
 .footer-col-mobile {
   display: none;
@@ -216,28 +229,13 @@ ul {
     text-align: center;
     margin: 62px auto 0px auto;
   }
-  .payment-links {
-    padding: 0px;
-  }
-  .payment-links div {
-    margin: 26px 0px;
-  }
+
   .end-footer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
-  .payment-links a {
-    display: inline-block;
-    height: 40px;
-    width: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: auto 0px;
-    text-align: center;
-    line-height: 40px;
-    border-radius: 50%;
-    font-size: large;
-    color: #ffffff;
-    transition: all 0.5s ease;
+  .bocongthuong a img {
+    width: 120px;
   }
   .social-links a {
     display: inline-block;

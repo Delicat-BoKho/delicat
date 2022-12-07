@@ -11,38 +11,9 @@
   >
     <div class="left-content flex-grow-1">
       <p>... items</p>
-      <div
-        style="
-          background-color: tomato;
-          height: 200px;
-          width: 90%;
-          margin-bottom: 20px;
-        "
-      ></div>
-      <div
-        style="
-          background-color: teal;
-          height: 200px;
-          width: 90%;
-          margin-bottom: 20px;
-        "
-      ></div>
-      <div
-        style="
-          background-color: aquamarine;
-          height: 200px;
-          width: 90%;
-          margin-bottom: 20px;
-        "
-      ></div>
-      <div
-        style="
-          background-color: brown;
-          height: 200px;
-          width: 90%;
-          margin-bottom: 20px;
-        "
-      ></div>
+      <app-product-basket
+        *ngFor="let item of [1, 2, 3, 4, 5]"
+      ></app-product-basket>
     </div>
 
     <div class="right-content">

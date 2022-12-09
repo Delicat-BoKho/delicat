@@ -21,7 +21,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { BasketComponent } from './basket/basket.component';
 import { ReviewDetailComponent } from './review-detail/review-detail.component';
 import { ProductBasketComponent } from './product-basket/product-basket.component';
+import { AccountInfoComponent } from './account-info/account-info.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ContactComponent } from './contact/contact.component';
+
 
 
 @NgModule({
@@ -45,6 +48,8 @@ import { ContactComponent } from './contact/contact.component';
     BasketComponent,
     ReviewDetailComponent,
     ProductBasketComponent,
+    AccountInfoComponent,
+    ResetPasswordComponent
     ContactComponent
   ],
   imports: [

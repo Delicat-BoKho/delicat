@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { BasketComponent } from './basket/basket.component';
+import { BlogComponent } from './blog/blog.component';
+import { ContactComponent } from './contact/contact.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
+import { PaymentComponent } from './payment/payment.component';
 import { PolicyComponent } from './policy/policy.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { ShopComponent } from './shop/shop.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -15,7 +21,14 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'policy', component: PolicyComponent },
-  { path: 'about-us', component: AboutUsComponent },
+  { path: 'about', component: AboutUsComponent },
+  { path: 'shop/product-detail', component: ProductDetailComponent },
+  { path: 'basket', component: BasketComponent },
+  { path: 'blog', component: BlogComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'contact', component: ContactComponent },
+  // {path: 'reset-password', component: Reset-}
 ];
 
 @NgModule({

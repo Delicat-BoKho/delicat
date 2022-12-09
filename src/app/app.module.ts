@@ -25,8 +25,6 @@ import { AccountInfoComponent } from './account-info/account-info.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ContactComponent } from './contact/contact.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,14 +47,11 @@ import { ContactComponent } from './contact/contact.component';
     ReviewDetailComponent,
     ProductBasketComponent,
     AccountInfoComponent,
-    ResetPasswordComponent
-    ContactComponent
+    ResetPasswordComponent,
+    ContactComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -3,9 +3,6 @@
   text-transform: uppercase;
 }
 
-.container__blog {
-}
-
 .blog__cover {
   position: relative;
   user-select: none;
@@ -65,11 +62,6 @@
 
 /* responsive */
 /* Desktop */
-@media screen and (max-width: 1920px) {
-  .content__item {
-    /* width: 40%; */
-  }
-}
 @media screen and (max-width: 1280px) {
   .content__item {
     width: 45%;

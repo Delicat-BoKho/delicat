@@ -30,37 +30,11 @@ export class BasketComponent implements OnInit {
       };
     }).length;
 
-    // if (this.listItemDetail.length > 0) {
-    //   for (let p of this.listItemDetail) {
-    //     if (this.mapSum.has(p.id)) {
-    //       this.mapSum.set(p.id, Number(this.mapSum.get(p.id)) + p.quantity);
-    //     } else {
-    //       this.mapSum.set(p.id, p.quantity);
-    //     }
-    //   }
-
-    //   console.log(this.mapSum);
-    // }
-
-    // this.listItemDetailFinal = this.listItemDetail.filter((item) => {
-    //   if (this.mapSum.has(item.id)) {
-    //     item.quantity = Number(this.mapSum.get(item.id));
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // });
-
-    // this.listItemDetailFinal = this.listItemDetailFinal.filter(
-    //   (element, index) => {
-    //     return this.listItemDetailFinal.indexOf(element) === index;
-    //   }
-    // );
-
-    // console.log(this.listItemDetailFinal);
-
     for (let i = 0; i < this.listItemDetail.length; i++)
-      [(this.totalPrice += this.listItemDetail[i].price)];
+      [
+        (this.totalPrice +=
+          this.listItemDetail[i].price * this.listItemDetail[i].quantity),
+      ];
   }
 
   totalPrice: number = 0;

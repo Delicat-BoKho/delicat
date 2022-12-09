@@ -19,7 +19,7 @@ export class PaymentComponent implements OnInit {
     console.log(this.listItemDetail);
 
     for (let i = 0; i < this.listItemDetail.length; i++) {
-      this.totalPrice =
+      this.totalPrice +=
         this.listItemDetail[i].quantity * this.listItemDetail[i].price;
     }
   }

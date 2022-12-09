@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { BlogComponent } from './blog/blog.component';
 import { BasketComponent } from './basket/basket.component';
-import { BlogComponent } from './blog/blog.component';
 import { ContactComponent } from './contact/contact.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -14,6 +13,9 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductItemComponent } from './product-item/product-item.component';
 import { ShopComponent } from './shop/shop.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AccountInfoComponent } from './account-info/account-info.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 
 const routes: Routes = [
   { path: 'shop', component: ShopComponent },
@@ -31,6 +33,9 @@ const routes: Routes = [
   { path: 'payment', component: PaymentComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'account-info', component: AccountInfoComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'blog/blog-detail', component: BlogDetailComponent },
   // {path: 'reset-password', component: Reset-}
 ];
 

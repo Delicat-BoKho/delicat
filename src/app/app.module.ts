@@ -21,6 +21,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { BasketComponent } from './basket/basket.component';
 import { ReviewDetailComponent } from './review-detail/review-detail.component';
 import { ProductBasketComponent } from './product-basket/product-basket.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ProductBasketComponent } from './product-basket/product-basket.componen
     ForgotPasswordComponent,
     BasketComponent,
     ReviewDetailComponent,
-    ProductBasketComponent
+    ProductBasketComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

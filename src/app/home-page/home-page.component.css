@@ -3,11 +3,11 @@
 }
 
 .container__homepage > div:nth-child(odd) {
-  background-color: var(--bs-secondary);
+  background-color: var(--bs-light);
 }
 
 .container__homepage > div:nth-child(even) {
-  background-color: var(--bs-light);
+  background-color: var(--bs-secondary);
 }
 
 .block-pd {
@@ -60,6 +60,10 @@ h1 {
   /* max-width: 90%; */
 }
 
+.img__discovery:hover {
+  cursor: pointer;
+}
+
 .sub__discovery > :first-child {
   margin-bottom: 16px;
 }
@@ -80,9 +84,6 @@ h1 {
 
 /*=================================================*/
 /* Best Seller */
-.best__seller {
-  /* background-color: #e5d1bf; */
-}
 
 .best__seller .title h1 {
   background-color: #e5d1bf;
@@ -97,6 +98,12 @@ h1 {
   height: 542px !important;
 }
 
+.left__item:hover > img,
+.right__item div > img:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 .right__item > div > img {
   object-fit: cover;
   width: 262px !important;
@@ -105,16 +112,13 @@ h1 {
 
 /*=================================================*/
 /* New Products*/
-.new__products {
-  /* background-color: #e5d1bf; */
-}
-
 .new__products .title h1 {
   background-color: var(--bs-light);
 }
 
 .shop__now {
   text-align: center;
+  margin-top: 20px;
 }
 
 .btn-shop-now {

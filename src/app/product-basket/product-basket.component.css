@@ -1,5 +1,14 @@
 .container-product-basket {
   width: 90%;
+  margin-bottom: 20px;
+}
+
+.container-product-basket:hover {
+  cursor: pointer;
+}
+
+.container-product-basket:hover .img img {
+  opacity: 0.7;
 }
 
 .img img {
@@ -22,6 +31,12 @@
 
 .choose__size__color > p:first-child {
   width: 80px;
+}
+
+.choose__quantity {
+  background: white;
+  width: fit-content;
+  border-radius: 16px;
 }
 
 .choose__quantity > * {

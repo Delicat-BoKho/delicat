@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BasketModel } from 'src/models/basket-model';
 import { ProductDetailModel, ProductModel } from 'src/models/product-model';
 import { ApiService } from 'src/services/api.service';
 
@@ -8,56 +9,21 @@ import { ApiService } from 'src/services/api.service';
   styleUrls: ['./product-basket.component.css'],
 })
 export class ProductBasketComponent implements OnInit {
-  constructor(private api: ApiService) {}
+  constructor() {}
 
-  async ngOnInit(): Promise<void> {
-    await this.loadListItems();
-    this.productDetail = {
-      id: this.product.id,
-      name: this.product.name,
-      price: this.product.price,
-      imgURL: this.product.imgURL[0],
-      describe: this.product.describe,
-      tag: this.product.tag,
-      quantity: 0,
-      size: this.product.size[0],
-      color: this.product.color[0],
-    };
+  ngOnInit(): void {}
 
-    this.mainImg = '../../assets/img/' + this.productDetail.imgURL;
-    this.size = this.productDetail.size;
-    this.color =
-      this.productDetail.color[0].toUpperCase() +
-      this.productDetail.color.substring(1);
+  basket: BasketModel = localStorage.getItem('basket')
+    ? JSON.parse(localStorage.getItem('basket')!)
+    : {
+        productDetails: [],
+        total: 0,
+        totalToPay: 0,
+      };
 
-    this.price = '$' + this.productDetail.price;
-  }
-
-  mainImg: string = '';
-  size: string = '';
-  color: string = '';
-  price: string = '';
-
-  product!: ProductModel;
+  @Input() productBasket!: ProductDetailModel;
 
   productDetail!: ProductDetailModel;
-
-  listItems!: ProductModel[];
-
-  async loadListItems() {
-    let jsonItemsSuit = await this.api.loadDataJson(
-      '../../assets/data/products_suit.json'
-    );
-
-    let jsonItemsAccessories = await this.api.loadDataJson(
-      '../../assets/data/products_accessories.json'
-    );
-
-    this.listItems = jsonItemsSuit.concat(jsonItemsAccessories);
-    this.product = this.listItems[0];
-    console.log(this.product);
-    // Gán mảng tạm để filter
-  }
 
   changeQuantity(quantity: number) {
     if (this.productDetail.quantity <= 0 && quantity < 0) {
@@ -65,5 +31,17 @@ export class ProductBasketComponent implements OnInit {
       return;
     }
     this.productDetail.quantity += quantity;
+  }
+
+  redirectToProductDetail() {
+    window.location.href = '/shop/product-detail?id=' + this.productBasket.id;
+  }
+
+  removeFromBasket(productDetailId: string) {
+    this.basket.productDetails = this.basket.productDetails.filter(
+      (p) => p.id !== productDetailId
+    );
+    localStorage.setItem('basket', JSON.stringify(this.basket));
+    window.location.reload();
   }
 }

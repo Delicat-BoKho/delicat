@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Comments } from '../../models/product-model';
 
 @Component({
   selector: 'app-review-detail',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./review-detail.component.css'],
 })
 export class ReviewDetailComponent implements OnInit {
-  @Input() reviewDetail!: any;
+  @Input() reviewDetail!: Comments;
 
   ratingStar: number[] = [];
 
@@ -15,7 +16,7 @@ export class ReviewDetailComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.ratingStar = Array(this.reviewDetail!.reviews.ratingStar).fill(0);
+    this.ratingStar = Array(this.reviewDetail!.ratingComment).fill(0);
     this.ratingStarGray = Array(5 - this.ratingStar.length).fill(0);
   }
 }

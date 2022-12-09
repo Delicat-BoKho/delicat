@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ProductModel } from 'src/models/product-model';
 
 @Component({
   selector: 'app-product-item',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./product-item.component.css'],
 })
 export class ProductItemComponent implements OnInit {
-  @Input() productDetail!: any;
+  @Input() productDetail!: ProductModel;
 
   ratingStar: number[] = [];
 
@@ -15,8 +16,12 @@ export class ProductItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.ratingStar = Array(this.productDetail!.reviews.ratingStar).fill(0);
-
+    console.log(this.productDetail.id);
+    this.ratingStar = Array(this.productDetail.reviews.ratingStar).fill(0);
     this.ratingStarGray = Array(5 - this.ratingStar.length).fill(0);
+  }
+
+  redirectToProductDetail() {
+    window.location.href = '/shop/product-detail?id=' + this.productDetail.id;
   }
 }

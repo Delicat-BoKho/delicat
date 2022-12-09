@@ -1,4 +1,11 @@
 <div class="container-basket">
+  <nav aria-label="breadcrumb" style="padding: 12px 0" class="bg-secondary">
+    <ol class="breadcrumb" style="margin-left: 85px; margin-bottom: 0">
+      <li class="breadcrumb-item"><a href="">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="cart">My basket</li>
+    </ol>
+  </nav>
+
   <div class="basket__cover">
     <div class="cover__img">
       <img src="../../assets/img/cover.png" alt="" />
@@ -10,17 +17,20 @@
     class="container content-basket d-flex flex-grow-1 justify-content-between flex-row"
   >
     <div class="left-content flex-grow-1">
-      <p>... items</p>
-      <app-product-basket
-        *ngFor="let item of [1, 2, 3, 4, 5]"
-      ></app-product-basket>
+      <p>
+        <strong>{{ countItem }} items</strong>
+      </p>
+      <div *ngFor="let item of basket.productDetails">
+        <!-- /*Button close*/ -->
+        <app-product-basket [productBasket]="item"> </app-product-basket>
+      </div>
     </div>
 
     <div class="right-content">
       <div class="bill__cover">
         <div>
-          <p>Total: .. items</p>
-          <p>$600</p>
+          <p>Total: {{ countItem }} items</p>
+          <p>${{ totalPrice }}</p>
         </div>
 
         <div>
@@ -31,11 +41,17 @@
         <hr />
         <div>
           <p><strong>Total to pay:</strong></p>
-          <p>$6000</p>
+          <p>${{ totalPrice }}</p>
         </div>
       </div>
 
-      <button type="button" class="btn btn-primary btn-pay">PAY</button>
+      <button
+        type="button"
+        class="btn btn-primary btn-pay"
+        (click)="redirectToProductDetail()"
+      >
+        PAY
+      </button>
     </div>
   </div>
 </div>

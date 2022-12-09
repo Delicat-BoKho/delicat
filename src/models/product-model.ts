@@ -10,11 +10,6 @@ export type ProductModel = {
   reviews: Reviews;
 };
 
-type Reviews = {
-  ratingStar: number;
-  countReviews: number;
-};
-
 export type ProductDetailModel = {
   id: string;
   name: string;
@@ -25,4 +20,19 @@ export type ProductDetailModel = {
   quantity: number;
   size: string;
   color: string;
+  reviews: Reviews;
+};
+
+type Reviews = {
+  ratingStar: number;
+  countReviews: number;
+  comments: Comments[];
+};
+
+export type Comments = {
+  id: number;
+  ratingComment: number;
+  userName: string;
+  dateCreate: string;
+  review: string;
 };

@@ -27,9 +27,6 @@
   padding-bottom: 60px;
 }
 
-left-content {
-}
-
 .right-content {
   width: 350px;
 }
@@ -57,4 +54,18 @@ left-content {
 .btn-pay {
   width: 100%;
   background-color: black;
+}
+
+/*=================================================*/
+/* RESPONSIVE */
+@media only screen and (max-width: 1024px) {
+  .content-basket {
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .right-content {
+    width: 50%;
+    margin: 0 auto;
+  }
 }

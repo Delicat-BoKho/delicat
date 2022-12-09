@@ -1,5 +1,6 @@
 .container__product-detail {
   margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 .img__product {
@@ -16,10 +17,19 @@
   margin: 10px 0;
 }
 
+.left__img__product div:hover img {
+  opacity: 0.5;
+}
+
 .right__img__product img {
   height: 640px;
   width: 400px;
   margin-top: 10px;
+  transition: 0.5s all ease-in-out;
+}
+
+.right__img__product:hover img {
+  transform: scale(1.05);
 }
 
 .section__reviews {
@@ -99,6 +109,9 @@
 
 .choose__quantity {
   margin-left: 20px;
+  background: white;
+  width: fit-content;
+  border-radius: 16px;
 }
 
 .choose__quantity > * {
@@ -122,6 +135,10 @@
 
 #quantity {
   width: 50px;
+}
+
+#starGray {
+  color: grey;
 }
 
 .buy__product {

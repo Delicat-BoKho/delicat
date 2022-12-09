@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductDetailModel, ProductModel } from 'src/models/product-model';
 import { ApiService } from 'src/services/api.service';
+import { BasketModel } from '../../models/basket-model';
 
 @Component({
   selector: 'app-product-detail',
@@ -9,6 +10,8 @@ import { ApiService } from 'src/services/api.service';
 })
 export class ProductDetailComponent implements OnInit {
   constructor(private api: ApiService) {}
+
+  idSearch: string = new URLSearchParams(window.location.search).get('id')!;
 
   async ngOnInit(): Promise<void> {
     await this.loadListItems();
@@ -22,12 +25,26 @@ export class ProductDetailComponent implements OnInit {
       quantity: 0,
       size: ' ',
       color: ' ',
+      reviews: this.product.reviews,
     };
 
+    this.ratingStar = Array(this.productDetail.reviews.ratingStar).fill(0);
+    this.ratingStarGray = Array(5 - this.ratingStar.length).fill(0);
+
     this.mainImg = '../../assets/img/' + this.productDetail.imgURL;
+    this.subImg_0 = '../../assets/img/' + this.product.imgURL[0];
+    this.subImg_1 = '../../assets/img/' + this.product.imgURL[1];
+    this.subImg_2 = '../../assets/img/' + this.product.imgURL[2];
   }
 
   mainImg: string = '';
+  subImg_0: string = '';
+  subImg_1: string = '';
+  subImg_2: string = '';
+
+  ratingStar: number[] = [];
+
+  ratingStarGray: number[] = [];
 
   product!: ProductModel;
 
@@ -57,8 +74,11 @@ export class ProductDetailComponent implements OnInit {
     );
 
     this.listItems = jsonItemsSuit.concat(jsonItemsAccessories);
-    this.product = this.listItems[0];
-    console.log(this.product);
+
+    this.product = this.listItems.find((item) => item.id == this.idSearch)!;
+
+    // this.product = this.listItems[0];
+    // console.log(this.product);
     // Gán mảng tạm để filter
   }
 
@@ -68,5 +88,18 @@ export class ProductDetailComponent implements OnInit {
       return;
     }
     this.productDetail.quantity += quantity;
+  }
+
+  addToCart() {
+    let basket: BasketModel = JSON.parse(localStorage.getItem('basket')!);
+    if (basket == null) {
+      basket = {
+        productDetails: [],
+        total: 0,
+        totalToPay: 0,
+      };
+    }
+    basket.productDetails.push(this.productDetail);
+    localStorage.setItem('basket', JSON.stringify(basket));
   }
 }

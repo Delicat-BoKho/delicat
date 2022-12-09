@@ -1,4 +1,7 @@
-<div class="item__container d-flex flex-column">
+<div
+  class="item__container d-flex flex-column"
+  (click)="redirectToProductDetail()"
+>
   <div class="item d-flex flex-column">
     <img
       alt=""
@@ -8,7 +11,7 @@
     />
 
     <div class="price__item">
-      <span>{{ "$" + productDetail.price }}</span>
+      <span>${{ productDetail.price }}.00</span>
     </div>
   </div>
 
@@ -32,7 +35,7 @@
 
       <div class="reviews">
         <p class="number__reviews">
-          {{ productDetail.reviews.countReviews + "reviews" }}
+          {{ productDetail.reviews.countReviews + " reviews" }}
         </p>
       </div>
     </div>

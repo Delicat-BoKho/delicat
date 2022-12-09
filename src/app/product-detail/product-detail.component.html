@@ -1,39 +1,39 @@
-<div class="container__product-detail container d-flex flex-column flex-grow-1">
+<nav aria-label="breadcrumb" style="padding: 12px 0" class="bg-secondary">
+  <ol class="breadcrumb" style="margin-left: 85px; margin-bottom: 0">
+    <li class="breadcrumb-item"><a href="">Home</a></li>
+    <li class="breadcrumb-item"><a href="shop">Shop</a></li>
+    <li class="breadcrumb-item active" aria-current="id">
+      {{ productDetail.name }}
+    </li>
+  </ol>
+</nav>
+<div
+  *ngIf="productDetail"
+  class="container__product-detail container d-flex flex-column flex-grow-1"
+>
   <div class="section__up d-flex flex-row">
     <div class="img__product d-flex flex-row justify-content-around">
       <div class="left__img__product">
         <div>
-          <img
-            src="../../assets/img/item.jpg"
-            alt=""
-            (click)="changeImg($event)"
-          />
+          <img alt="" [src]="subImg_0" (click)="changeImg($event)" />
         </div>
         <div>
-          <img
-            src="../../assets/img/discovery_1.jpg"
-            alt=""
-            (click)="changeImg($event)"
-          />
+          <img alt="" [src]="subImg_1" (click)="changeImg($event)" />
         </div>
         <div>
-          <img
-            src="../../assets/img/discovery_2.jpg"
-            alt=""
-            (click)="changeImg($event)"
-          />
+          <img alt="" [src]="subImg_2" (click)="changeImg($event)" />
         </div>
       </div>
 
       <div class="right__img__product">
-        <img src="../../assets/img/item.jpg" alt="" [src]="mainImg" />
+        <img [src]="mainImg" />
       </div>
     </div>
 
     <div class="right__content d-flex flex-column flex-grow-1">
       <div class="product__order">
-        <p class="product__name">Lap top..</p>
-        <span class="product__price">$190.00</span>
+        <p class="product__name">{{ productDetail.name }}</p>
+        <span class="product__price">${{ productDetail.price }}.00</span>
         <div class="select__size">
           <p>
             Select size: <span>{{ productDetail.size }}</span>
@@ -85,6 +85,8 @@
               type="button"
               class="btn btn-secondary btn-cart"
               style="border: 1px solid var(--bs-primary)"
+              [disabled]="productDetail.quantity === 0"
+              (click)="addToCart()"
             >
               Add to cart
             </button>
@@ -124,14 +126,7 @@
             data-bs-parent="#accordionExample"
           >
             <div class="accordion-body">
-              <strong>This is the first item's accordion body.</strong> It is
-              shown by default, until the collapse plugin adds the appropriate
-              classes that we use to style each element. These classes control
-              the overall appearance, as well as the showing and hiding via CSS
-              transitions. You can modify any of this with custom CSS or
-              overriding our default variables. It's also worth noting that just
-              about any HTML can go within the <code>.accordion-body</code>,
-              though the transition does limit overflow.
+              <p>{{ productDetail.describe }}</p>
             </div>
           </div>
         </div>
@@ -142,26 +137,34 @@
       <div class="rating d-flex justify-content-between">
         <div class="d-flex flex-row">
           <div class="score">
-            <p>Rating: <span>5.0/5.0</span></p>
+            <p>
+              Rating: <span>{{ productDetail.reviews.ratingStar }}.0/5.0</span>
+            </p>
           </div>
           <div class="star">
             <i
+              *ngFor="let i of ratingStar"
               class="bi bi-star-fill"
               id="starYellow"
-              *ngFor="let i of [1, 2, 3, 4, 5]"
+            ></i>
+
+            <i
+              *ngFor="let i of ratingStarGray"
+              class="bi bi-star-fill"
+              id="starGray"
             ></i>
           </div>
         </div>
 
         <div class="number__reviews justify-content-end">
-          <p>5 reviews</p>
+          <p></p>
         </div>
       </div>
       <div class="comments">
-        <div>Nguyên</div>
-        <div>Nguyên</div>
-        <div>Nguyên</div>
-        <div>Nguyên</div>
+        <app-review-detail
+          *ngFor="let item of productDetail.reviews.comments"
+          [reviewDetail]="item"
+        ></app-review-detail>
       </div>
     </div>
   </div>

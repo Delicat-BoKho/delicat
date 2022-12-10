@@ -1,3 +1,11 @@
+# Nhóm 6 - Délicat
+
+- Slide báo cáo.
+- File báo cáo.
+- Mockup Figma: [Mockup Figma](https://www.figma.com/file/eQrIebBc7rBXeODUgnghy7/Mockup?node-id=1329%3A12323)
+- Các sơ đồ phân tích luồng nghiệp vụ, dữ liệu: [BA](https://drive.google.com/drive/folders/118VpDj6ySFXX7kwDm2V5pu-ZGB7dVuaM?usp=sharing)
+- Mã nguồn website: [Github](https://github.com/Delicat-BoKho/delicat.git)
+
 # Delicat
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.

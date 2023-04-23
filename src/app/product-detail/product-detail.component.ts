@@ -102,4 +102,8 @@ export class ProductDetailComponent implements OnInit {
     basket.productDetails.push(this.productDetail);
     localStorage.setItem('basket', JSON.stringify(basket));
   }
+
+  redirectToPayment() {
+    window.location.href = '/payment';
+  }
 }

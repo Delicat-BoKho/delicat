@@ -1,8 +1,5 @@
-<div
-  class="item__container d-flex flex-column"
-  (click)="redirectToProductDetail()"
->
-  <div class="item d-flex flex-column">
+<div class="item__container d-flex flex-column">
+  <div class="item d-flex flex-column" (click)="redirectToProductDetail()">
     <img
       alt=""
       class="itemImg"
@@ -13,6 +10,13 @@
     <div class="price__item">
       <span>${{ productDetail.price }}.00</span>
     </div>
+  </div>
+
+  <div class="btn-wishlist">
+    <a>
+      <i class="bi bi-heart btn-un-hover"></i>
+      <i class="bi bi-heart-fill btn-hover"></i>
+    </a>
   </div>
 
   <div class="info__item">

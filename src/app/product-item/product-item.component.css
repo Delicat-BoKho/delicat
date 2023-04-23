@@ -2,6 +2,7 @@
 .item__container {
   width: 225px;
   height: auto;
+  position: relative;
 }
 
 .item__container:hover {
@@ -15,6 +16,33 @@
 .itemImg {
   width: 225px;
   height: auto;
+}
+
+.btn-wishlist {
+  z-index: 999;
+  position: absolute;
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+  right: 10px;
+  top: 10px;
+  background-color: white;
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-wishlist .btn-hover {
+  display: none;
+}
+
+.btn-wishlist:hover .btn-un-hover {
+  display: none;
+}
+
+.btn-wishlist:hover .btn-hover {
+  display: block;
 }
 
 @media (max-width: 768px) {

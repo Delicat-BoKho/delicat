@@ -4,6 +4,9 @@ import { TagContentType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from 'src/models/product-model';
 import { ApiService } from 'src/services/api.service';
+import { ProductService } from '../services/product.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-shop',
@@ -14,7 +17,7 @@ export class ShopComponent implements OnInit {
   checkSize!: boolean;
 
   //Test
-  templistItemsPrice: ProductModel[] = [];
+  templistItemsPrice: Product[] = [];
 
   checkFirstFilter: boolean = true;
 
@@ -22,15 +25,23 @@ export class ShopComponent implements OnInit {
 
   sortFlag: 'asc' | 'des' = 'asc';
 
-  listItems: ProductModel[] = [];
+  listItems: Product[] = [];
 
-  templistItems: ProductModel[] = [];
+  templistItems: Product[] = [];
 
-  templistItemsFinal: ProductModel[] = [];
+  templistItemsFinal: Product[] = [];
 
   arrayFilter: Map<string, string[]> = new Map<string, string[]>();
 
-  constructor(private api: ApiService) {}
+  //===================//
+  products: Product[] = [];
+  errMessage: string = '';
+
+  constructor(
+    private api: ApiService,
+    private service: ProductService,
+    private fireStorage: AngularFireStorage
+  ) {}
 
   ngOnInit(): void {
     if (window.innerWidth < 1024) {
@@ -43,27 +54,47 @@ export class ShopComponent implements OnInit {
     this.arrayFilter.set('color', []);
     this.arrayFilter.set('tag', []);
 
-    this.loadListItems();
+    // this.loadListItems();
+
+    //===================//
+    this.getProducts();
+    console.log(this.products);
   }
 
-  // checkTag!: boolean;
+  // get all items in shop
+  getProducts() {
+    this.service.getProducts().subscribe({
+      next: (res: any) => {
+        this.products = res;
 
-  async loadListItems() {
-    let jsonItemsSuit = await this.api.loadDataJson(
-      '../../assets/data/products_suit.json'
-    );
-
-    let jsonItemsAccessories = await this.api.loadDataJson(
-      '../../assets/data/products_accessories.json'
-    );
-
-    this.listItems = jsonItemsSuit.concat(jsonItemsAccessories);
-
-    // Gán mảng tạm để filter
-    this.templistItems = this.listItems;
-    this.templistItemsFinal = this.listItems;
+        this.listItems = res;
+        this.templistItems = this.listItems;
+        this.templistItemsFinal = this.listItems;
+      },
+      error: (err) => {
+        this.errMessage = err;
+        console.log('Error occured while fetching file meta data');
+      },
+    });
   }
 
+  // async loadListItems() {
+  //   let jsonItemsSuit = await this.api.loadDataJson(
+  //     '../../assets/data/products_suit.json'
+  //   );
+
+  //   let jsonItemsAccessories = await this.api.loadDataJson(
+  //     '../../assets/data/products_accessories.json'
+  //   );
+
+  //   this.listItems = jsonItemsSuit.concat(jsonItemsAccessories);
+
+  //   // Gán mảng tạm để filter
+  //   this.templistItems = this.listItems;
+  //   this.templistItemsFinal = this.listItems;
+  // }
+
+  // filter all items
   filter(event: Event, stringFilter: string, typeFilter: string) {
     let includeFilter: boolean = this.arrayFilter
       .get(typeFilter)!
@@ -95,12 +126,12 @@ export class ShopComponent implements OnInit {
       let result: boolean = true;
       [...this.arrayFilter.keys()].forEach((k) => {
         if (this.arrayFilter.get(k)!.length > 0) {
-          switch (typeof product[k as keyof ProductModel]) {
+          switch (typeof product[k as keyof Product]) {
             case 'string':
               if (
                 !this.arrayFilter
                   .get(k)!
-                  .includes(product[k as keyof ProductModel] as string)
+                  .includes(product[k as keyof Product] as string)
               ) {
                 result = false;
                 return;
@@ -109,7 +140,7 @@ export class ShopComponent implements OnInit {
             case 'number':
               break;
             default:
-              let valueProps = product[k as keyof ProductModel] as string[];
+              let valueProps = product[k as keyof Product] as string[];
               let matchCount: number = 0;
               this.arrayFilter.get(k)!.forEach((f) => {
                 if (valueProps.includes(f)) {
@@ -147,6 +178,7 @@ export class ShopComponent implements OnInit {
     }
   }
 
+  // oder by asc
   orderByPrice() {
     this.sortFlag = 'asc';
     this.templistItemsFinal = this.templistItemsFinal.sort(
@@ -154,6 +186,7 @@ export class ShopComponent implements OnInit {
     );
   }
 
+  // oder by desc
   orderDescByPrice() {
     this.sortFlag = 'des';
     this.templistItemsFinal = this.templistItemsFinal.sort(

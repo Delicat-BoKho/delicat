@@ -36,20 +36,40 @@
         <span class="product__price">${{ productDetail.price }}.00</span>
         <div class="select__size">
           <p>
-            Select size: <span>{{ productDetail.size }}</span>
+            Select size: <span>{{ selectSizeDefault }}</span>
           </p>
           <div class="all__size d-flex flex-wrap">
-            <div *ngFor="let item of product.size">
+            <div *ngFor="let item of productDetail.size">
               <input
                 type="checkbox"
                 class="btn-check"
                 [id]="'btn-check-2-outlined' + item"
-                [checked]="
-                  'btn-check-2-outlined' + item ===
-                  'btn-check-2-outlined' + productDetail.size
-                "
+                [checked]="item === sizeChecked"
                 autocomplete="off"
                 (click)="changeSize($event, item)"
+              />
+              <label
+                class="btn btn-outline-primary"
+                [htmlFor]="'btn-check-2-outlined' + item"
+                >{{ item }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="select__color">
+          <p>
+            Select color: <span>{{ selectColorDefault }}</span>
+          </p>
+          <div class="all__color d-flex flex-wrap">
+            <div *ngFor="let item of productDetail.color">
+              <input
+                type="checkbox"
+                class="btn-check"
+                [id]="'btn-check-2-outlined' + item"
+                [checked]="item === colorChecked"
+                autocomplete="off"
+                (click)="changeColor($event, item)"
               />
               <label
                 class="btn btn-outline-primary"
@@ -69,7 +89,7 @@
               >
                 -
               </button>
-              <p id="quantity">{{ productDetail.quantity }}</p>
+              <p id="quantity">{{ productDetailBuy.quantity }}</p>
               <button
                 type="button"
                 class="btn btn-secondary btn-lg"
@@ -85,8 +105,19 @@
               type="button"
               class="btn btn-secondary btn-cart"
               style="border: 1px solid var(--bs-primary)"
-              [disabled]="productDetail.quantity === 0"
-              (click)="addToCart()"
+              [disabled]="
+                (productDetailBuy.quantity === 0 &&
+                  selectColorDefault === '' &&
+                  selectSizeDefault === '') ||
+                (productDetailBuy.quantity === 0 &&
+                  selectColorDefault === '') ||
+                (productDetailBuy.quantity === 0 && selectSizeDefault === '') ||
+                (selectColorDefault === '' && selectSizeDefault === '') ||
+                productDetailBuy.quantity === 0 ||
+                selectColorDefault === '' ||
+                selectSizeDefault === ''
+              "
+              (click)="viewBasket()"
             >
               Add to cart
             </button>
@@ -94,7 +125,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              (click)="redirectToPayment()"
+              (click)="viewPayment()"
             >
               Buy now
             </button>
@@ -132,7 +163,7 @@
             data-bs-parent="#accordionExample"
           >
             <div class="accordion-body">
-              <p>{{ productDetail.describe }}</p>
+              <p [innerHTML]="productDetail.describe"></p>
             </div>
           </div>
         </div>
@@ -144,7 +175,7 @@
         <div class="d-flex flex-row">
           <div class="score">
             <p>
-              Rating: <span>{{ productDetail.reviews.ratingStar }}.0/5.0</span>
+              Rating: <span>{{ getRatingStar() }}.0/5.0</span>
             </p>
           </div>
           <div class="star">
@@ -168,7 +199,7 @@
       </div>
       <div class="comments">
         <app-review-detail
-          *ngFor="let item of productDetail.reviews.comments"
+          *ngFor="let item of productDetail.reviews"
           [reviewDetail]="item"
         ></app-review-detail>
       </div>

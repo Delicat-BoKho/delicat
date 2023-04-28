@@ -77,6 +77,11 @@ hr {
   background-color: #9a9a9a;
 }
 
+#flexCheckChecked-navy:not(:checked),
+#flexCheckChecked-navy:checked {
+  background-color: #385170;
+}
+
 .all__tags {
   margin-top: 20px;
 }

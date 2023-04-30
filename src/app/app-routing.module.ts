@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'about', component: AboutUsComponent },
-  { path: 'shop/product-detail', component: ProductDetailComponent },
+  { path: 'shop/product-detail/:id', component: ProductDetailComponent },
   { path: 'basket', component: BasketComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'payment', component: PaymentComponent },

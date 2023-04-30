@@ -99,12 +99,26 @@
   width: 60px;
 }
 
+.select__color {
+  margin-top: 20px;
+}
+
+.select__color p {
+  font-weight: 500;
+}
+
+.all__color > div > label {
+  margin-left: 10px;
+  width: 80px;
+}
+
 .select__quantity {
   margin-top: 20px;
 }
 
 .select__quantity p {
   margin: 0;
+  font-weight: 500;
 }
 
 .choose__quantity {

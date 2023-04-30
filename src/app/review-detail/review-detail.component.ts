@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comments } from '../../models/product-model';
+import { Comment } from '../models/comment';
 
 @Component({
   selector: 'app-review-detail',
@@ -7,7 +7,7 @@ import { Comments } from '../../models/product-model';
   styleUrls: ['./review-detail.component.css'],
 })
 export class ReviewDetailComponent implements OnInit {
-  @Input() reviewDetail!: Comments;
+  @Input() reviewDetail!: Comment;
 
   ratingStar: number[] = [];
 

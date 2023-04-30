@@ -11,20 +11,20 @@
     </div>
 
     <div class="sub__discovery container d-flex flex-row flex-wrap">
-      <div class="img__discovery" (click)="redirectToShop()">
+      <div class="img__discovery" (click)="viewShop()">
         <button
           class="btn-discovery btn-shop btn btn-primary rounded-5 fs-7 fw-bold"
-          (click)="redirectToShop()"
+          (click)="viewShop()"
         >
-          SHOP SUIT
+          SHOP SUITS
         </button>
         <img src="../../assets/img/discovery_1.jpg" alt="" />
       </div>
 
-      <div class="img__discovery" (click)="redirectToShop()">
+      <div class="img__discovery" (click)="viewShop()">
         <button
           class="btn-discovery btn-shop btn btn-primary rounded-5 fs-7 fw-bold"
-          (click)="redirectToShop()"
+          (click)="viewShop()"
         >
           SHOP ACCESSORIES
         </button>
@@ -46,7 +46,7 @@
       class="list_item_best_seller container d-flex justify-content-evenly flex-wrap"
     >
       <app-product-item
-        *ngFor="let item of tempListItemsBestSeller"
+        *ngFor="let item of itemBestSellerShow"
         [productDetail]="item"
       ></app-product-item>
     </div>
@@ -63,35 +63,15 @@
 
     <div class="container d-flex flex-row sub__best__collection">
       <div class="left__item flex-grow-1 w-50 d-flex justify-content-center">
-        <img
-          src="../../assets/img/S005_0.jpg"
-          alt=""
-          (click)="redirectToShop()"
-        />
+        <img src="../../assets/img/S005_0.jpg" alt="" (click)="viewShop()" />
       </div>
 
       <div class="right__item d-flex w-50 flex-grow-1 justify-content-center">
         <div class="d-flex flex-wrap gap-3 justify-content-center">
-          <img
-            src="../../assets/img/A001_0.jpg"
-            alt=""
-            (click)="redirectToShop()"
-          />
-          <img
-            src="../../assets/img/A002_0.jpg"
-            alt=""
-            (click)="redirectToShop()"
-          />
-          <img
-            src="../../assets/img/S003_0.jpg"
-            alt=""
-            (click)="redirectToShop()"
-          />
-          <img
-            src="../../assets/img/S004_0.jpg"
-            alt=""
-            (click)="redirectToShop()"
-          />
+          <img src="../../assets/img/A001_0.jpg" alt="" (click)="viewShop()" />
+          <img src="../../assets/img/A002_0.jpg" alt="" (click)="viewShop()" />
+          <img src="../../assets/img/S003_0.jpg" alt="" (click)="viewShop()" />
+          <img src="../../assets/img/S004_0.jpg" alt="" (click)="viewShop()" />
         </div>
       </div>
     </div>
@@ -109,7 +89,7 @@
 
     <div class="container all__items d-flex flex-wrap justify-content-evenly">
       <app-product-item
-        *ngFor="let item of tempListItemsNewProduct"
+        *ngFor="let item of itemNewShow"
         [productDetail]="item"
       ></app-product-item>
     </div>
@@ -117,7 +97,7 @@
     <div class="shop__now">
       <button
         class="btn-shop btn btn-primary rounded-5 fs-7 fw-bold"
-        (click)="redirectToShop()"
+        (click)="viewShop()"
       >
         SHOP NOW
       </button>

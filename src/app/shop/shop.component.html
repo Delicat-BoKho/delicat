@@ -21,7 +21,7 @@
               aria-expanded="true"
               aria-controls="panelsStayOpen-collapseOne"
             >
-              SUIT
+              SUITS
             </button>
           </h2>
           <div
@@ -36,11 +36,11 @@
                   class="form-check-input"
                   type="checkbox"
                   value=""
-                  id="flexCheckChecked-Suiting"
-                  (click)="filter($event, 'suiting', 'tag')"
+                  id="flexCheckChecked-Suits"
+                  (click)="filter($event, 'suits', 'tag')"
                 />
-                <label class="form-check-label" for="flexCheckChecked-Suiting">
-                  Suiting
+                <label class="form-check-label" for="flexCheckChecked-Suits">
+                  Suits
                 </label>
               </div>
 
@@ -143,6 +143,32 @@
                 />
                 <label class="form-check-label" for="flexCheckDefault-Belts">
                   Belts
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault-Hats"
+                  (click)="filter($event, 'hats', 'tag')"
+                />
+                <label class="form-check-label" for="flexCheckDefault-Hats">
+                  Hats
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault-Scarves"
+                  (click)="filter($event, 'scarves', 'tag')"
+                />
+                <label class="form-check-label" for="flexCheckDefault-Scarves">
+                  Scarves
                 </label>
               </div>
             </div>
@@ -442,6 +468,19 @@
                   Gray
                 </label>
               </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckChecked-navy"
+                  (click)="filter($event, 'navy', 'color')"
+                />
+                <label class="form-check-label" for="flexCheckChecked-navy">
+                  Navy
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -531,6 +570,10 @@
           *ngFor="let item of templistItemsFinal"
           [productDetail]="item"
         ></app-product-item>
+        <!-- <app-product-item
+          *ngFor="let item of products"
+          [productDetail]="item"
+        ></app-product-item> -->
       </div>
     </div>
   </div>

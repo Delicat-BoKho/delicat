@@ -12,29 +12,28 @@ import { BasketModel } from '../../models/basket-model';
 export class BasketComponent implements OnInit {
   constructor() {}
 
-  basket: BasketModel = localStorage.getItem('basket')
-    ? JSON.parse(localStorage.getItem('basket')!)
-    : {
-        productDetails: [],
-        total: 0,
-        totalToPay: 0,
-      };
+  // basket: BasketModel = localStorage.getItem('basket')
+  //   ? JSON.parse(localStorage.getItem('basket')!)
+  //   : {
+  //       productDetails: [],
+  //       total: 0,
+  //       totalToPay: 0,
+  //     };
 
   ngOnInit(): void {
     // Lấy ra số lượng sản phẩm trong giả hàng
-    this.countItem = Array.from(
-      new Set(this.listItemDetail.map((s) => s.id))
-    ).map((id) => {
-      return {
-        id: id,
-      };
-    }).length;
-
-    for (let i = 0; i < this.listItemDetail.length; i++)
-      [
-        (this.totalPrice +=
-          this.listItemDetail[i].price * this.listItemDetail[i].quantity),
-      ];
+    // this.countItem = Array.from(
+    //   new Set(this.listItemDetail.map((s) => s.id))
+    // ).map((id) => {
+    //   return {
+    //     id: id,
+    //   };
+    // }).length;
+    // for (let i = 0; i < this.listItemDetail.length; i++)
+    //   [
+    //     (this.totalPrice +=
+    //       this.listItemDetail[i].price * this.listItemDetail[i].quantity),
+    //   ];
   }
 
   totalPrice: number = 0;
@@ -43,18 +42,18 @@ export class BasketComponent implements OnInit {
 
   countItem: number = 0;
 
-  listItemDetail: ProductDetailModel[] = JSON.parse(
-    localStorage.getItem('basket')!
-  ).productDetails;
+  // listItemDetail: ProductDetailModel[] = JSON.parse(
+  //   localStorage.getItem('basket')!
+  // ).productDetails;
 
   listItemDetailFinal!: ProductDetailModel[];
 
-  removeFromBasket(productDetailId: string) {
-    this.basket.productDetails = this.basket.productDetails.filter(
-      (p) => p.id !== productDetailId
-    );
-    localStorage.setItem('basket', JSON.stringify(this.basket));
-  }
+  // removeFromBasket(productDetailId: string) {
+  //   this.basket.productDetails = this.basket.productDetails.filter(
+  //     (p) => p.id !== productDetailId
+  //   );
+  //   localStorage.setItem('basket', JSON.stringify(this.basket));
+  // }
 
   redirectToProductDetail() {
     window.location.href = '/payment';

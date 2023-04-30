@@ -109,7 +109,7 @@ export class ShopComponent implements OnInit {
         .get(typeFilter)
         ?.splice(this.arrayFilter.get(typeFilter)!.indexOf(stringFilter), 1);
     }
-    // console.log('array filter: ', this.arrayFilter);
+    console.log('array filter: ', this.arrayFilter);
 
     this.templistItems = [];
 
@@ -119,7 +119,6 @@ export class ShopComponent implements OnInit {
         arr.push(i)
       return arr
     */
-
     // Xử lý filter
 
     this.templistItems = this.listItems.filter((product) => {
@@ -136,10 +135,13 @@ export class ShopComponent implements OnInit {
                 result = false;
                 return;
               }
+              //console.log('key string');
               break;
             case 'number':
+              //console.log('key number');
               break;
             default:
+              //console.log('key default');
               let valueProps = product[k as keyof Product] as string[];
               let matchCount: number = 0;
               this.arrayFilter.get(k)!.forEach((f) => {
@@ -158,10 +160,11 @@ export class ShopComponent implements OnInit {
       this.checkFirstFilter = false;
       return result;
     });
-
+    console.log(this.templistItems);
     this.filterPrice(this.previousPriceFilter.toString());
   }
 
+  // filter price in range (0,500)
   filterPrice(price: string) {
     this.previousPriceFilter = Number(price);
     console.log(this.previousPriceFilter.toString());

@@ -82,11 +82,12 @@ export class ProductDetailComponent implements OnInit {
     this.productDetailBuy.price = this.productDetail.price;
     this.productDetailBuy.imgURL = this.productDetail.imgURL;
     this.productDetailBuy.describe = this.productDetail.describe;
-    this.productDetailBuy.tag = this.productDetail.id;
+    this.productDetailBuy.tag = this.productDetail.tag;
     this.productDetailBuy.size = this.productDetail.size[0];
     this.productDetailBuy.color = this.productDetail.color[0];
     this.productDetailBuy.reviews = this.productDetail.reviews;
     this.productDetailBuy.quantity = 1;
+    console.log(this.productDetailBuy);
   }
 
   // change img show

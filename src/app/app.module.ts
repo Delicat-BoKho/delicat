@@ -32,6 +32,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { ProductItemWishlistComponent } from './product-item-wishlist/product-item-wishlist.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     AccountInfoComponent,
     ResetPasswordComponent,
     ContactComponent,
+    WishlistComponent,
+    ProductItemWishlistComponent,
   ],
   imports:
   [

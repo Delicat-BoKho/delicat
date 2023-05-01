@@ -34,6 +34,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProductItemWishlistComponent } from './product-item-wishlist/product-item-wishlist.component';
+import { BlogItemComponent } from './blog-item/blog-item.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ProductItemWishlistComponent } from './product-item-wishlist/product-it
     ContactComponent,
     WishlistComponent,
     ProductItemWishlistComponent,
+    BlogItemComponent,
   ],
   imports:
   [

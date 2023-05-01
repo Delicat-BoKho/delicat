@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'account-info', component: AccountInfoComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'blog/blog-detail', component: BlogDetailComponent },
+  { path: 'blog/blog-detail/:id', component: BlogDetailComponent },
   { path: 'wishlist', component: WishlistComponent },
   // {path: 'reset-password', component: Reset-}
 ];

@@ -35,6 +35,9 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProductItemWishlistComponent } from './product-item-wishlist/product-item-wishlist.component';
 import { BlogItemComponent } from './blog-item/blog-item.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { OrderItemComponent } from './order-item/order-item.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,9 @@ import { BlogItemComponent } from './blog-item/blog-item.component';
     WishlistComponent,
     ProductItemWishlistComponent,
     BlogItemComponent,
+    MyAccountComponent,
+    OrderItemComponent,
+    OrderComponent,
   ],
   imports:
   [

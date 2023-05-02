@@ -17,6 +17,8 @@ import { AccountInfoComponent } from './account-info/account-info.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   { path: 'shop', component: ShopComponent },
@@ -38,6 +40,8 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'blog/blog-detail/:id', component: BlogDetailComponent },
   { path: 'wishlist', component: WishlistComponent },
+  { path: 'user/profile', component: MyAccountComponent },
+  { path: 'user/order/:id', component: OrderComponent },
   // {path: 'reset-password', component: Reset-}
 ];
 

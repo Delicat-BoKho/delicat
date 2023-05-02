@@ -1,0 +1,133 @@
+<div class="container__profile">
+  <nav aria-label="breadcrumb" style="padding: 12px 0" class="bg-secondary">
+    <ol class="breadcrumb" style="margin-left: 85px; margin-bottom: 0">
+      <li class="breadcrumb-item"><a href="">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="blog">User</li>
+    </ol>
+  </nav>
+
+  <div class="profile__cover">
+    <div class="cover__img">
+      <img src="../../assets/img/cover.png" alt="" />
+    </div>
+    <h1 class="cover__title uppercase">my account</h1>
+  </div>
+
+  <div class="profile__content">
+    <div class="content__up" style="margin-bottom: 40px">
+      <h3>Welcome, NhatNguyen</h3>
+    </div>
+
+    <div class="row content__down">
+      <div class="col-4 content__left">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a
+            class="list-group-item list-group-item-action active"
+            id="list-home-list"
+            data-bs-toggle="list"
+            href="#list-home"
+            role="tab"
+            aria-controls="list-home"
+            >My profile</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            id="list-profile-list"
+            data-bs-toggle="list"
+            href="#list-profile"
+            role="tab"
+            aria-controls="list-profile"
+            >My orders</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            id="list-messages-list"
+            data-bs-toggle="list"
+            href="#list-messages"
+            role="tab"
+            aria-controls="list-messages"
+            >Sign out</a
+          >
+        </div>
+      </div>
+      <div class="col-8 content__right">
+        <div class="tab-content" id="nav-tabContent">
+          <div
+            class="tab-pane fade show active content__my__profile"
+            id="list-home"
+            role="tabpanel"
+            aria-labelledby="list-home-list"
+          >
+            <form action="#" class="row g-3" id="form_infor" dmethod="POST">
+              <h4>MY PROFILE</h4>
+              <hr />
+              <div class="col-12">
+                <label
+                  for="Username"
+                  class="form-label"
+                  style="font-weight: normal"
+                  ><span style="font-weight: 500; color: black">Username: </span
+                  >nguyentn20406c@gmail.com</label
+                >
+              </div>
+              <div class="col-md-5">
+                <label for="inputFirstName" class="form-label"
+                  >First Name <span>*</span></label
+                >
+                <input type="text" class="form-control" id="inputFirstName" />
+              </div>
+              <div class="col-md-5">
+                <label for="inputLastName" class="form-label"
+                  >Last Name <span>*</span></label
+                >
+                <input type="text" class="form-control" id="inputLastName" />
+              </div>
+              <div class="col-md-10">
+                <label for="inputMobileNumber" class="form-label"
+                  >Mobile Number <span>*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputMobileNumber"
+                />
+              </div>
+
+              <div class="col-md-10">
+                <label for="inputAddress" class="form-label"
+                  >Address <span>*</span></label
+                >
+                <input type="text" class="form-control" id="inputAddress" />
+              </div>
+              <div class="form-button">
+                <button type="submit" class="btn-save">SAVE</button>
+              </div>
+            </form>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="list-profile"
+            role="tabpanel"
+            aria-labelledby="list-profile-list"
+          >
+            <h4>MY ORDERS</h4>
+            <hr />
+            <div style="margin-top: 30px">
+              <app-order-item
+                *ngFor="let item of [1, 2, 3, 4, 5]"
+              ></app-order-item>
+            </div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="list-messages"
+            role="tabpanel"
+            aria-labelledby="list-messages-list"
+          >
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

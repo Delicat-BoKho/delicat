@@ -13,6 +13,8 @@
         aria-describedby="emailHelp"
         placeholder="Email"
         required
+        name="email"
+        [(ngModel)]="email"
       />
     </div>
     <div class="mb-3">
@@ -25,11 +27,13 @@
         id="inputPassword"
         placeholder="Password"
         required
+        name="password"
+        [(ngModel)]="password"
       />
     </div>
     <p>Forgot your password? <a href="forgot-password">Click here</a></p>
     <div class="form-button">
-      <button type="submit" class="btn-login">Log in</button>
+      <button type="submit" class="btn-login" (click)="login()">Log in</button>
     </div>
     <div class="division">
       <div class="line l"></div>

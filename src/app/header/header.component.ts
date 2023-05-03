@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  constructor(private _router: Router) {}
 
   ngOnInit(): void {}
 
@@ -14,5 +15,15 @@ export class HeaderComponent implements OnInit {
 
   toggleSearch() {
     this.isSearchOpen = !this.isSearchOpen;
+  }
+
+  checkLogin() {
+    console.log(typeof localStorage.getItem('token'));
+
+    if (localStorage.getItem('token') == null) {
+      this._router.navigate(['login']);
+    } else {
+      this._router.navigate(['user/profile']);
+    }
   }
 }

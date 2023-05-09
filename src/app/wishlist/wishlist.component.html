@@ -58,6 +58,7 @@
       <app-product-item-wishlist
         *ngFor="let item of products"
         [productDetail]="item"
+        [customerInfo]="customerInfo"
       ></app-product-item-wishlist>
 
       <div *ngIf="isHaveProduct" class="no__items">

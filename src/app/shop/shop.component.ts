@@ -7,6 +7,9 @@ import { ApiService } from 'src/services/api.service';
 import { ProductService } from '../services/product.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Product } from '../models/product';
+import { CustomerService } from '../services/customer.service';
+import { Router } from '@angular/router';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-shop',
@@ -37,10 +40,16 @@ export class ShopComponent implements OnInit {
   products: Product[] = [];
   errMessage: string = '';
 
+  //===================//
+  customerInfo!: User;
+  wishlishLocalStorage: string[] = [];
+
   constructor(
-    private api: ApiService,
-    private service: ProductService,
-    private fireStorage: AngularFireStorage
+    // private api: ApiService,
+    private _pService: ProductService,
+    private fireStorage: AngularFireStorage,
+    private _cService: CustomerService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,11 +68,43 @@ export class ShopComponent implements OnInit {
     //===================//
     this.getProducts();
     console.log(this.products);
+
+    //===================//
+    this.getCustomerById();
+    console.log(this.products);
+  }
+
+  // get customer by Id
+  getCustomerById() {
+    // check login
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    // Đã login --> lưu vào customerInfo
+    if (customerId !== 'undefined') {
+      this._cService.getCustomerById(customerId).subscribe({
+        next: (res) => {
+          this.customerInfo = res;
+        },
+        error: (err) => {
+          this.errMessage = err;
+        },
+      });
+    }
+    // Chưa login --> Lưu vào localStorage
+    else {
+      // const wishlishLocalStorage = localStorage.getItem('wishlist');
+      // const cartLocalStorage = localStorage.getItem('cart');
+      // localStorage.setItem(
+      //   'wishlist',
+      //   JSON.stringify(this.wishlishLocalStorage)
+      // );
+    }
   }
 
   // get all items in shop
   getProducts() {
-    this.service.getProducts().subscribe({
+    this._pService.getProducts().subscribe({
       next: (res: any) => {
         this.products = res;
 
@@ -77,22 +118,6 @@ export class ShopComponent implements OnInit {
       },
     });
   }
-
-  // async loadListItems() {
-  //   let jsonItemsSuit = await this.api.loadDataJson(
-  //     '../../assets/data/products_suit.json'
-  //   );
-
-  //   let jsonItemsAccessories = await this.api.loadDataJson(
-  //     '../../assets/data/products_accessories.json'
-  //   );
-
-  //   this.listItems = jsonItemsSuit.concat(jsonItemsAccessories);
-
-  //   // Gán mảng tạm để filter
-  //   this.templistItems = this.listItems;
-  //   this.templistItemsFinal = this.listItems;
-  // }
 
   // filter all items
   filter(event: Event, stringFilter: string, typeFilter: string) {

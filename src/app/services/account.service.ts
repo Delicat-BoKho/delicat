@@ -6,6 +6,8 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { User } from '../models/user';
+import { sha256 } from 'js-sha256';
+import { Account } from '../models/account';
 
 @Injectable({
   providedIn: 'root',
@@ -20,15 +22,23 @@ export class AccountService {
 
   // login method
   login(email: string, password: string) {
-    console.log('Email: ' + email + '\n' + 'Password: ' + password);
+    // Hash password
+    const passwordHash = sha256(password).toString();
 
-    this.fireauth.signInWithEmailAndPassword(email, password).then(
+    // console.log('Vào hàm login');
+
+    // sign in with email and password
+    this.fireauth.signInWithEmailAndPassword(email, passwordHash).then(
       async (res) => {
-        console.log(res);
+        console.log(1);
+
         if (res.user?.emailVerified == true) {
+          console.log(2);
           //đăng nhập thành công, kiểm tra xem customer này có trong collection customer chưa
-          const docRef = firebase.firestore().doc('Customer/' + res.user?.uid);
-          docRef
+          const docRefCustomer = firebase
+            .firestore()
+            .doc('Customer/' + res.user?.uid);
+          docRefCustomer
             .get()
             .then(
               (
@@ -70,6 +80,47 @@ export class AccountService {
               // Handle errors
             });
 
+          // console.log(3);
+          // // Kiểm tra xem đã có user trong firebase chưa
+          // const docRefUser = firebase.firestore().doc('User/' + res.user?.uid);
+          // docRefUser
+          //   .get()
+          //   .then(
+          //     (
+          //       docSnapshot: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>
+          //     ) => {
+          //       if (docSnapshot.exists) {
+          //         // Nếu có rồi thì thôi
+          //       } else {
+          //         //Nếu chưa có thì tạo mới
+          //         const myDoc = this.fireStore
+          //           .collection('/User')
+          //           .doc(res.user?.uid);
+
+          //         const user = new Account(); //Tạo mới user theo cấu trúc của user
+
+          //         const userMeta = {
+          //           id: res.user?.uid,
+          //           userName: email,
+          //           role: user.role,
+          //         };
+
+          //         myDoc
+          //           .set(userMeta)
+          //           .then(() => {
+          //             console.log('Document successfully written!');
+          //           })
+          //           .catch((error) => {
+          //             console.error('Error writing document: ', error);
+          //           });
+          //       }
+          //     }
+          //   )
+          //   .catch((error: Error) => {
+          //     // Handle errors
+          //   });
+
+          // next
           this.router.navigate(['']);
 
           // local storage token
@@ -88,7 +139,11 @@ export class AccountService {
 
   // register method
   register(email: string, password: string) {
-    this.fireauth.createUserWithEmailAndPassword(email, password).then(
+    // hash password
+    const passwordHash = sha256(password);
+
+    // create user with email and password
+    this.fireauth.createUserWithEmailAndPassword(email, passwordHash).then(
       (res) => {
         alert('Registration Successful');
         this.sendEmailForVarification(res.user);
@@ -154,24 +209,32 @@ export class AccountService {
 
   async changePassword(
     email: string,
-    oldPassword: string,
+    currentPassword: string,
     newPassword: string
   ) {
     try {
+      const currentPasswordHash = sha256(currentPassword).toString();
+
       // Log in the user with their old password
       const userCredential = await this.fireauth.signInWithEmailAndPassword(
         email,
-        oldPassword
+        currentPasswordHash
       );
 
-      // Check if the user's email is verified
-      const user = userCredential.user; // user is of type User | null
-      if (user && user.emailVerified) {
-        // Update the user's password
-        await user.updatePassword(newPassword);
-        console.log('Password updated successfully');
+      if (typeof userCredential === 'object') {
+        const newPasswordHash = sha256(newPassword).toString();
+
+        // Check if the user's email is verified
+        const user = userCredential.user; // user is of type User | null
+        if (user && user.emailVerified) {
+          // Update the user's password
+          await user.updatePassword(newPasswordHash);
+          console.log('Password updated successfully');
+        } else {
+          console.log('User email is not verified');
+        }
       } else {
-        console.log('User email is not verified');
+        alert('Current password is incorrect!');
       }
     } catch (error) {
       console.log('Error updating password:', error);

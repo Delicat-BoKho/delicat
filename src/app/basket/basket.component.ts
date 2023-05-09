@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 import { ProductDetailModel } from 'src/models/product-model';
 import { BasketModel } from '../../models/basket-model';
+import { Router } from '@angular/router';
+import { CustomerService } from '../services/customer.service';
+import { User } from '../models/user';
+import { CartItem } from '../models/cart';
 
 @Component({
   selector: 'app-basket',
@@ -10,7 +14,14 @@ import { BasketModel } from '../../models/basket-model';
   styleUrls: ['./basket.component.css'],
 })
 export class BasketComponent implements OnInit {
-  constructor() {}
+  customerInfo!: User;
+  errMessage: string = '';
+
+  cartItemTemp!: CartItem;
+
+  constructor(private _router: Router, private _cService: CustomerService) {
+    this.getCustomerById();
+  }
 
   // basket: BasketModel = localStorage.getItem('basket')
   //   ? JSON.parse(localStorage.getItem('basket')!)
@@ -57,5 +68,41 @@ export class BasketComponent implements OnInit {
 
   redirectToProductDetail() {
     window.location.href = '/payment';
+  }
+
+  // get customer by Id
+  getCustomerById() {
+    // console.log('Vào get customer by id');
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    if (customerId == null) {
+      this._router.navigate(['login']);
+    } else {
+      this._cService.getCustomerById(customerId).subscribe({
+        next: (res) => {
+          this.customerInfo = res;
+
+          this.cartItemTemp = res.cart[0];
+          console.log(this.cartItemTemp);
+          console.log(this.customerInfo);
+        },
+        error: (err) => {
+          this.errMessage = err;
+        },
+      });
+    }
+  }
+
+  updateCart(customerId: string, cartItem: CartItem) {
+    // const token = localStorage.getItem('token')?.toString();
+    // const checkcustomerId = token?.replace(/"/g, '');
+
+    cartItem.quantity = 6;
+
+    console.log('Hello');
+    console.log(customerId, cartItem);
+
+    this._cService.saveCart(customerId, cartItem);
   }
 }

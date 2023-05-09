@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product';
+import { CustomerService } from '../services/customer.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-wishlist',
@@ -10,21 +12,63 @@ import { Product } from '../models/product';
 })
 export class WishlistComponent {
   products: Product[] = [];
+  wishlistProductIds: string[] = [];
   errMessage: string = '';
 
   isHaveProduct: boolean = true;
 
   sortFlag: 'asc' | 'des' = 'asc';
 
-  constructor(private _router: Router, private service: ProductService) {
-    this.getProducts();
+  customerInfo!: User;
+
+  constructor(
+    private _router: Router,
+    private service: ProductService,
+    private _cService: CustomerService
+  ) {
+    this.getCustomerById();
   }
 
-  // get all items in shop
-  getProducts() {
-    this.service.getProducts().subscribe({
+  // get customer by Id
+  getCustomerById() {
+    // console.log('Vào get customer by id');
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    console.log(1);
+
+    if (typeof customerId !== 'undefined') {
+      this._cService.getCustomerById(customerId).subscribe({
+        next: (res) => {
+          this.customerInfo = res;
+          this.wishlistProductIds = res.wishlist;
+          this.getProductsWishList();
+        },
+        error: (err) => {
+          this.errMessage = err;
+        },
+      });
+    } else {
+      const wishlishLocalStorage = localStorage.getItem('wishlist');
+      let myArray = [];
+
+      // Chưa login: kiểm tra đã tồn tại wishlist trong localStorage chưa
+      if (wishlishLocalStorage) {
+        myArray = JSON.parse(wishlishLocalStorage);
+
+        this.wishlistProductIds = myArray;
+        console.log(this.wishlistProductIds);
+        this.getProductsWishList();
+      }
+    }
+  }
+
+  // check login
+  getProductsWishList() {
+    this.service.getProductsByIds(this.wishlistProductIds).subscribe({
       next: (res: any) => {
         this.products = res;
+        console.log(this.products);
 
         if (this.products.length > 0) {
           this.isHaveProduct = false;
@@ -32,7 +76,6 @@ export class WishlistComponent {
       },
       error: (err) => {
         this.errMessage = err;
-        console.log('Error occured while fetching file meta data');
       },
     });
   }
@@ -51,5 +94,22 @@ export class WishlistComponent {
 
   viewShop() {
     this._router.navigate(['shop']);
+  }
+
+  // get all items in shop
+  getProducts() {
+    this.service.getProducts().subscribe({
+      next: (res: any) => {
+        this.products = res;
+
+        if (this.products.length > 0) {
+          this.isHaveProduct = false;
+        }
+      },
+      error: (err) => {
+        this.errMessage = err;
+        console.log('Error occured while fetching file meta data');
+      },
+    });
   }
 }

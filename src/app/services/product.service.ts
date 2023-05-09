@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Product } from '../models/product';
 import { Observable, combineLatest, map, switchMap, forkJoin } from 'rxjs';
-import { query, orderBy, limit } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -57,21 +56,32 @@ export class ProductService {
   }
 
   //get list items by ids
-  getProductsByIds(productIds: string[]): Observable<Product[]> {
-    const products: Observable<Product>[] = [];
-    for (const productId of productIds) {
-      const productDoc = this.fireStore
-        .collection('/ProductTemp')
-        .doc(productId);
-      const product = productDoc.valueChanges() as Observable<Product>;
-      const productWithReviews = combineLatest([product]).pipe(
-        map(([productData]) => ({
-          ...productData,
-        }))
+  getProductsByIds(productIds: string[]) {
+    return this.fireStore
+      .collection('/ProductTemp', (ref) => ref.where('id', 'in', productIds))
+      .snapshotChanges()
+      .pipe(
+        map((products) =>
+          products.map((product) => {
+            const data = product.payload.doc.data() as Product;
+            const id = product.payload.doc.id;
+            return this.fireStore
+              .collection('/ProductTemp')
+              .doc(id)
+              .collection('reviews')
+              .get()
+              .pipe(
+                map((reviews) => {
+                  const reviewsArray = reviews.docs.map((review) =>
+                    review.data()
+                  );
+                  return { ...data, reviews: reviewsArray };
+                })
+              );
+          })
+        ),
+        switchMap((productObservables) => combineLatest(productObservables))
       );
-      products.push(productWithReviews);
-    }
-    return forkJoin(products);
   }
 
   // post and put item
@@ -106,6 +116,8 @@ export class ProductService {
       .catch((error) => {
         console.error('Error writing document: ', error);
       });
+
+    // push data to subCollection (firebase)
     subCollection
       .set({
         id: product.reviews[0].id,
@@ -122,30 +134,30 @@ export class ProductService {
       });
   }
 
-  // delete item
-  async deleteProduct(product: Product) {
-    const productDocRef = this.fireStore
-      .collection('/ProductTemp')
-      .doc(product.id).ref;
-    const reviewsCollectionRef = this.fireStore
-      .collection('/ProductTemp')
-      .doc(product.id)
-      .collection('reviews').ref;
+  // // delete item
+  // async deleteProduct(product: Product) {
+  //   const productDocRef = this.fireStore
+  //     .collection('/ProductTemp')
+  //     .doc(product.id).ref;
+  //   const reviewsCollectionRef = this.fireStore
+  //     .collection('/ProductTemp')
+  //     .doc(product.id)
+  //     .collection('reviews').ref;
 
-    const batch = this.fireStore.firestore.batch();
-    batch.delete(productDocRef);
-    const deleteReviewsQuery = await reviewsCollectionRef.limit(500).get();
-    deleteReviewsQuery.forEach((doc) => batch.delete(doc.ref));
+  //   const batch = this.fireStore.firestore.batch();
+  //   batch.delete(productDocRef);
+  //   const deleteReviewsQuery = await reviewsCollectionRef.limit(500).get();
+  //   deleteReviewsQuery.forEach((doc) => batch.delete(doc.ref));
 
-    batch
-      .commit()
-      .then(() => {
-        console.log('Product and reviews successfully deleted');
-      })
-      .catch((error) => {
-        console.error('Error deleting product and reviews: ', error);
-      });
-  }
+  //   batch
+  //     .commit()
+  //     .then(() => {
+  //       console.log('Product and reviews successfully deleted');
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error deleting product and reviews: ', error);
+  //     });
+  // }
 
   selectedProduct!: Product;
 

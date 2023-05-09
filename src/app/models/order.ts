@@ -9,6 +9,6 @@ export class Order {
     public paymentMethod: string = '',
     public status: string = '',
     public total: number = 0,
-    public salesProducts: SaleProducts[] = []
+    public saleProducts: Array<SaleProducts> = []
   ) {}
 }

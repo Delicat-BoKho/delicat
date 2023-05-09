@@ -2,18 +2,8 @@
   <form action="#" class="signup__form" method="POST">
     <h1 class="form-header">Sign up</h1>
     <p class="form-login">
-      Already have an account? <a href="login">Log in now</a>
+      Already have an account? <a (click)="viewLoginPage()">Log in now</a>
     </p>
-    <div class="mb-3">
-      <label for="inputName" class="form-label">Name <span>*</span></label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputName"
-        placeholder="Name"
-        required
-      />
-    </div>
     <div class="mb-3">
       <label for="inputEmail" class="form-label">Email <span>*</span></label>
       <input
@@ -23,6 +13,8 @@
         aria-describedby="emailHelp"
         placeholder="Email"
         required
+        name="email"
+        [(ngModel)]="email"
       />
     </div>
     <div class="mb-3">
@@ -35,6 +27,8 @@
         id="inputPassword"
         placeholder="Password"
         required
+        name="password"
+        [(ngModel)]="password"
       />
     </div>
     <div class="mb-3">
@@ -47,17 +41,21 @@
         id="confirmPassword"
         placeholder="Password"
         required
+        name="confirmPassword"
+        [(ngModel)]="confirmPassword"
       />
     </div>
     <div class="form-button">
-      <button type="submit" class="btn-register">Register</button>
+      <button type="submit" class="btn-register" (click)="register()">
+        Register
+      </button>
     </div>
     <div class="division">
       <div class="line l"></div>
       <span>OR</span>
       <div class="line r"></div>
     </div>
-    <div class="form-social-button">
+    <div class="form-social-button" (click)="signUpWithGoogle()">
       <a href="#" class="social-button" id="facebook-connect">
         <img src="../../assets/img/google_icon.png" alt="" /> Sign up with
         Google</a

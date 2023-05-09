@@ -1,34 +1,37 @@
 <div class="container_all">
   <div class="order__info d-flex justify-content-between">
     <div class="">
-      <p>0 items</p>
+      <p>{{ lengthItem }} items</p>
     </div>
 
-    <div>Completed</div>
+    <div style="text-transform: capitalize">{{ orderDetail.status }}</div>
   </div>
 
-  <div class="container-product-basket d-flex justify-content-between">
+  <div
+    class="container-product-basket d-flex justify-content-between"
+    (click)="viewOrderDetail(orderId)"
+  >
     <div class="d-flex flex-grow-1 img__cover">
       <div class="img">
-        <img src="../../assets/img/A001_2.jpg" alt="" />
+        <img [src]="imgItem" alt="" />
       </div>
 
       <div class="d-flex justify-content-between flex-grow-1">
         <div class="product-item">
           <div class="title">
             <p>
-              productNameproductNameproductNameproductNameproductNameproductName
+              {{ productName }}
             </p>
           </div>
 
           <div class="d-flex size__color">
-            <p class="size">Size: XL</p>
-            <p class="color">Color: green</p>
+            <p class="size">Size: {{ sizeChose }}</p>
+            <p class="color">Color: {{ colorChose }}</p>
           </div>
         </div>
         <div class="price__product">
-          <p class="unitPrice">$50.00</p>
-          <p class="quantity">x5</p>
+          <p class="unitPrice">${{ orderItemShow.unitPrice }}.00</p>
+          <p class="quantity">x{{ orderItemShow.quantity }}</p>
         </div>
       </div>
     </div>
@@ -38,14 +41,14 @@
 
   <div class="d-flex justify-content-between down__cover">
     <div class="totalPrice d-flex justify-content-center align-items-center">
-      <p style="margin: 0">Total: $500.00</p>
+      <p style="margin: 0">Total: ${{ orderDetail.total }}.00</p>
     </div>
 
     <div class="btn-detail">
       <button
         type="button"
         class="btn btn-dark btn-lg"
-        (click)="viewOrderDetail(orderDetail.id)"
+        (click)="viewOrderDetail(orderId)"
       >
         DETAIL
       </button>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CustomerService } from '../services/customer.service';
 import { Router } from '@angular/router';
 import { OrderService } from '../services/order.service';
+import { AccountService } from '../services/account.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-my-account',
@@ -9,14 +11,70 @@ import { OrderService } from '../services/order.service';
   styleUrls: ['./my-account.component.css'],
 })
 export class MyAccountComponent {
+  customerInfo: User = new User();
+  errMessage: string = '';
+
+  currentPassword: string = '';
+  newPassword: string = '';
+  confirmPassword: string = '';
+
   constructor(
     private _cService: CustomerService,
     private _oService: OrderService,
+    private _aService: AccountService,
     private _router: Router
-  ) {}
+  ) {
+    this.getCustomerById();
+  }
 
-  getCustomerById() {}
+  // get customer by Id
+  getCustomerById() {
+    // console.log('Vào get customer by id');
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
 
-  // save profile
-  saveProfile() {}
+    if (customerId == null) {
+      this._router.navigate(['login']);
+    } else {
+      this._cService.getCustomerById(customerId).subscribe({
+        next: (res) => {
+          this.customerInfo = res;
+        },
+        error: (err) => {
+          this.errMessage = err;
+        },
+      });
+    }
+  }
+
+  // save customer Info by Id
+  saveProfile() {
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    if (customerId == null) {
+      this._router.navigate(['login']);
+    } else {
+      this._cService.saveMetaDataOfFile(this.customerInfo);
+    }
+  }
+
+  // change password
+  changePassword() {
+    if (this.newPassword !== this.confirmPassword) {
+      alert('Password do not match!');
+    } else {
+      this._aService.changePassword(
+        this.customerInfo.userName,
+        this.currentPassword,
+        this.newPassword
+      );
+    }
+  }
+
+  // log out account
+  logout() {
+    this._aService.logout();
+    this._router.navigate(['login']);
+  }
 }

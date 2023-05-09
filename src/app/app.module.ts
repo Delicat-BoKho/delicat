@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {AngularFireModule} from '@angular/fire/compat';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,12 +26,12 @@ import { ProductBasketComponent } from './product-basket/product-basket.componen
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ContactComponent } from './contact/contact.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProductItemWishlistComponent } from './product-item-wishlist/product-item-wishlist.component';
 import { BlogItemComponent } from './blog-item/blog-item.component';
@@ -70,16 +70,16 @@ import { OrderComponent } from './order/order.component';
     OrderItemComponent,
     OrderComponent,
   ],
-  imports:
-  [
+  imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],
   bootstrap: [AppComponent],

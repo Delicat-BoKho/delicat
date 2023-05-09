@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductModel } from 'src/models/product-model';
 import { Product } from '../models/product';
 import { Router } from '@angular/router';
-import { ProductService } from '../services/product.service';
+import { User } from '../models/user';
+import { CustomerService } from '../services/customer.service';
 
 @Component({
   selector: 'app-product-item',
@@ -11,12 +12,13 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductItemComponent implements OnInit {
   @Input() productDetail!: Product;
+  @Input() customerInfo!: User;
 
   ratingStar: number[] = [];
   ratingStarGray: number[] = [];
   countReviews: number = 0;
 
-  constructor(private _router: Router, private service: ProductService) {}
+  constructor(private _router: Router, private _cService: CustomerService) {}
 
   ngOnInit(): void {
     console.log(this.productDetail.id);
@@ -43,6 +45,60 @@ export class ProductItemComponent implements OnInit {
     );
 
     return ratingStar;
+  }
+
+  // add item in wishlist
+  addWishlist(productId: string) {
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    // Chưa login --> Lưu vào localStorage
+    if (typeof token === 'undefined') {
+      const wishlishLocalStorage = localStorage.getItem('wishlist');
+      let myArray = [];
+
+      // Chưa login: kiểm tra đã tồn tại wishlist trong localStorage chưa
+      if (wishlishLocalStorage) {
+        // Đã có
+        myArray = JSON.parse(wishlishLocalStorage);
+
+        if (!myArray.includes(productId)) {
+          myArray.push(productId);
+
+          // lưu lại localStorage
+          localStorage.setItem('wishlist', JSON.stringify(myArray));
+        } else {
+          alert('Item already exists in wishlist!');
+        }
+      }
+    }
+
+    // Đã login
+    if (typeof customerId !== 'undefined') {
+      // Check item already in wishlist
+
+      // Not include --> Add to wishlist
+      if (!this.customerInfo.wishlist.includes(productId)) {
+        this.customerInfo.wishlist.push(productId);
+
+        // save changes
+        this.saveCustomerInfo(customerId);
+      }
+      // Included --> Not add to wishlist
+      else {
+        alert('Item already exists in wishlist!');
+        // console.log('Item đã tổn tại trong wishlist');
+      }
+    }
+  }
+
+  // save customer Info by Id
+  saveCustomerInfo(customerId: string) {
+    if (customerId == null) {
+      this._router.navigate(['login']);
+    } else {
+      this._cService.saveMetaDataOfFile(this.customerInfo);
+    }
   }
 
   // virew item detail

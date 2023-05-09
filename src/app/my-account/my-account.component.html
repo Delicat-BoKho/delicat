@@ -2,7 +2,7 @@
   <nav aria-label="breadcrumb" style="padding: 12px 0" class="bg-secondary">
     <ol class="breadcrumb" style="margin-left: 85px; margin-bottom: 0">
       <li class="breadcrumb-item"><a href="">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="blog">User</li>
+      <li class="breadcrumb-item active" aria-current="blog">My Account</li>
     </ol>
   </nav>
 
@@ -15,7 +15,7 @@
 
   <div class="profile__content">
     <div class="content__up" style="margin-bottom: 40px">
-      <h3>Welcome, NhatNguyen</h3>
+      <h3>Welcome, {{ customerInfo.fullName }}</h3>
     </div>
 
     <div class="row content__down">
@@ -32,26 +32,36 @@
           >
           <a
             class="list-group-item list-group-item-action"
-            id="list-profile-list"
+            id="list-order-list"
             data-bs-toggle="list"
-            href="#list-profile"
+            href="#list-order"
             role="tab"
-            aria-controls="list-profile"
+            aria-controls="list-order"
             >My orders</a
           >
           <a
             class="list-group-item list-group-item-action"
-            id="list-messages-list"
+            id="list-password-list"
             data-bs-toggle="list"
-            href="#list-messages"
+            href="#list-password"
             role="tab"
-            aria-controls="list-messages"
+            aria-controls="list-password"
+            >Change password</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            id="list-logout-list"
+            data-bs-toggle="list"
+            href="#list-logout"
+            role="tab"
+            aria-controls="list-logout"
             >Sign out</a
           >
         </div>
       </div>
       <div class="col-8 content__right">
         <div class="tab-content" id="nav-tabContent">
+          <!-- MY PROFILE -->
           <div
             class="tab-pane fade show active content__my__profile"
             id="list-home"
@@ -67,21 +77,22 @@
                   class="form-label"
                   style="font-weight: normal"
                   ><span style="font-weight: 500; color: black">Username: </span
-                  >nguyentn20406c@gmail.com</label
+                  >{{ customerInfo.userName }}</label
                 >
               </div>
-              <div class="col-md-5">
-                <label for="inputFirstName" class="form-label"
-                  >First Name <span>*</span></label
+              <div class="col-md-10">
+                <label for="inputFullName" class="form-label"
+                  >Full Name <span>*</span></label
                 >
-                <input type="text" class="form-control" id="inputFirstName" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputFullName"
+                  [(ngModel)]="customerInfo.fullName"
+                  name="fullName"
+                />
               </div>
-              <div class="col-md-5">
-                <label for="inputLastName" class="form-label"
-                  >Last Name <span>*</span></label
-                >
-                <input type="text" class="form-control" id="inputLastName" />
-              </div>
+
               <div class="col-md-10">
                 <label for="inputMobileNumber" class="form-label"
                   >Mobile Number <span>*</span></label
@@ -90,6 +101,8 @@
                   type="text"
                   class="form-control"
                   id="inputMobileNumber"
+                  [(ngModel)]="customerInfo.phone"
+                  name="phone"
                 />
               </div>
 
@@ -97,34 +110,111 @@
                 <label for="inputAddress" class="form-label"
                   >Address <span>*</span></label
                 >
-                <input type="text" class="form-control" id="inputAddress" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputAddress"
+                  [(ngModel)]="customerInfo.address"
+                  name="address"
+                />
               </div>
-              <div class="form-button">
-                <button type="submit" class="btn-save">SAVE</button>
+              <div class="form-button col-md-10">
+                <button type="submit" class="btn-save" (click)="saveProfile()">
+                  SAVE
+                </button>
               </div>
             </form>
           </div>
+
+          <!-- ORDERS -->
           <div
             class="tab-pane fade"
-            id="list-profile"
+            id="list-order"
             role="tabpanel"
-            aria-labelledby="list-profile-list"
+            aria-labelledby="list-order-list"
           >
             <h4>MY ORDERS</h4>
             <hr />
             <div style="margin-top: 30px">
               <app-order-item
-                *ngFor="let item of [1, 2, 3, 4, 5]"
+                *ngFor="let item of customerInfo.order"
+                [orderId]="item"
               ></app-order-item>
             </div>
           </div>
+
+          <!-- CHANGE PASSWORD -->
           <div
             class="tab-pane fade"
-            id="list-messages"
+            id="list-password"
             role="tabpanel"
-            aria-labelledby="list-messages-list"
+            aria-labelledby="list-password-list"
           >
-            ...
+            <form action="#" class="row g-3" id="form_infor" dmethod="POST">
+              <h4>CHANGE PASSWORD</h4>
+              <hr />
+              <div class="col-md-10">
+                <label for="inputCurrentPassword" class="form-label"
+                  >Old password <span>*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputCurrentPassword"
+                  [(ngModel)]="currentPassword"
+                  name="fullName"
+                />
+              </div>
+
+              <div class="col-md-10">
+                <label for="inputNewPassword" class="form-label"
+                  >New password <span>*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputNewPassword"
+                  [(ngModel)]="newPassword"
+                  name="phone"
+                />
+              </div>
+
+              <div class="col-md-10">
+                <label for="inputConfirmPassword" class="form-label"
+                  >Confirm password <span>*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputConfirmPassword"
+                  [(ngModel)]="confirmPassword"
+                  name="address"
+                />
+              </div>
+              <div class="form-button col-md-10">
+                <button
+                  type="submit"
+                  class="btn-save"
+                  (click)="changePassword()"
+                >
+                  SAVE
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- LOG OUT -->
+          <div
+            class="tab-pane fade"
+            id="list-logout"
+            role="tabpanel"
+            aria-labelledby="list-logout-list"
+          >
+            <div class="form-button">
+              <button type="submit" class="btn-save" (click)="logout()">
+                LOG OUT
+              </button>
+            </div>
           </div>
         </div>
       </div>

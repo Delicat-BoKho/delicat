@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductModel } from 'src/models/product-model';
 import { Product } from '../models/product';
 import { Router } from '@angular/router';
-import { ProductService } from '../services/product.service';
+import { CustomerService } from '../services/customer.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-product-item-wishlist',
@@ -11,16 +11,16 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductItemWishlistComponent {
   @Input() productDetail!: Product;
+  @Input() customerInfo!: User;
 
   ratingStar: number[] = [];
   ratingStarGray: number[] = [];
   countReviews: number = 0;
+  errMessage: string = '';
 
-  constructor(private _router: Router, private service: ProductService) {}
+  constructor(private _router: Router, private _cService: CustomerService) {}
 
   ngOnInit(): void {
-    console.log(this.productDetail.id);
-
     // get count reviews of item
     this.countReviews = this.productDetail.reviews.length;
 
@@ -51,5 +51,49 @@ export class ProductItemWishlistComponent {
   }
 
   // remove item in wishlist
-  removeWishlist() {}
+  removeWishlist(productId: string) {
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    // Chưa login --> Lưu vào localStorage
+    if (typeof token === 'undefined') {
+      const wishlishLocalStorage = localStorage.getItem('wishlist');
+      let myArray = [];
+
+      if (wishlishLocalStorage) {
+        // Đã có
+        myArray = JSON.parse(wishlishLocalStorage);
+
+        myArray = myArray.filter(
+          (element: any) => !productId.includes(element)
+        );
+
+        // lưu lại localStorages
+        localStorage.setItem('wishlist', JSON.stringify(myArray));
+        window.location.reload();
+      }
+    }
+
+    // Đã login
+    if (typeof customerId !== 'undefined') {
+      this.customerInfo.wishlist = this.customerInfo.wishlist.filter(
+        (element) => !productId.includes(element)
+      );
+
+      // save changes
+      this.saveCustomerInfo();
+    }
+  }
+
+  // save customer Info by Id
+  saveCustomerInfo() {
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    if (customerId == null) {
+      this._router.navigate(['login']);
+    } else {
+      this._cService.saveMetaDataOfFile(this.customerInfo);
+    }
+  }
 }

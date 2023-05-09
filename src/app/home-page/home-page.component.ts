@@ -7,6 +7,7 @@ import { ApiService } from 'src/services/api.service';
 import { ProductService } from '../services/product.service';
 import { Router } from '@angular/router';
 import { Product } from '../models/product';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-home-page',
@@ -17,10 +18,14 @@ export class HomePageComponent implements OnInit {
   itemBestSeller = ['S001', 'S002', 'S003', 'S004'];
   itemBestSellerShow: Product[] = [];
 
-  itemNew = ['A001', 'A002', 'A003', 'A004', 'S001', 'S002', 'S003', 'S004'];
+  itemNew = ['A002', 'A003', 'A004', 'S001', 'S002', 'S003', 'S004', 'S005'];
   itemNewShow: Product[] = [];
 
   checkSize!: boolean;
+
+  //===================//
+  customerInfo!: User;
+  wishlishLocalStorage: string[] = [];
 
   constructor(
     private api: ApiService,

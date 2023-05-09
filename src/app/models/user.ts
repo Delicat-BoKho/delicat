@@ -1,4 +1,4 @@
-import { Cart } from './cart';
+import { CartItem } from './cart';
 
 export class User {
   constructor(
@@ -9,6 +9,6 @@ export class User {
     public address: string = '',
     public wishlist: string[] = [],
     public order: string[] = [],
-    public cart: Cart[] = []
+    public cart: Array<CartItem> = []
   ) {}
 }

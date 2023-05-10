@@ -21,61 +21,43 @@
           >
             YOUR INFORMATION
           </p>
-          <div class="col-md-6">
-            <label for="inputFirstName" class="form-label"
-              >First Name <span>*</span></label
+          <div class="col-md-12">
+            <label for="inputFullName" class="form-label"
+              >Full Name <span>*</span></label
             >
-            <input type="text" class="form-control" id="inputFirstName" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputFullName"
+              name="fullName"
+              [(ngModel)]="fullName"
+            />
           </div>
-          <div class="col-md-6">
-            <label for="inputLastName" class="form-label"
-              >Last Name <span>*</span></label
-            >
-            <input type="text" class="form-control" id="inputLastName" />
-          </div>
-          <div class="col-md-4">
+
+          <div class="col-md-12">
             <label for="inputMobileNumber" class="form-label"
               >Mobile Number <span>*</span></label
             >
-            <input type="text" class="form-control" id="inputMobileNumber" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputMobileNumber"
+              name="phone"
+              [(ngModel)]="phone"
+            />
           </div>
-          <div class="col-md-8">
-            <label for="inputEmail" class="form-label"
-              >Email <span>*</span></label
-            >
-            <input type="email" class="form-control" id="inputEmail" />
-          </div>
-          <p
-            class="form-biglable"
-            style="margin-top: 40px; color: var(--bs-info); font-weight: 500"
-          >
-            YOUR ADDRESS
-          </p>
 
-          <div class="col-md-6">
+          <div class="col-md-12">
             <label for="inputAddressNumber" class="form-label"
               >Address Number <span>*</span></label
             >
-            <input type="text" class="form-control" id="inputAddressNumber" />
-          </div>
-          <div class="col-md-6">
-            <label for="inputStreet" class="form-label"
-              >Street <span>*</span></label
-            >
-            <input type="text" class="form-control" id="inputStreet" />
-          </div>
-
-          <div class="col-md-6">
-            <label for="inputDistrict" class="form-label"
-              >District<span>*</span></label
-            >
-            <input type="text" class="form-control" id="inputDistrict" />
-          </div>
-          <div class="col-md-6">
-            <label for="inputCity" class="form-label"
-              >City <span>*</span></label
-            >
-            <input type="text" class="form-control" id="inputCity" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputAddressNumber"
+              name="address"
+              [(ngModel)]="address"
+            />
           </div>
 
           <div
@@ -158,7 +140,7 @@
                       margin-top: 20px;
                     "
                   >
-                    Pay ${{ totalPrice }}
+                    Pay ${{ totalPrice }}.00
                   </button>
                 </div>
               </div>
@@ -203,8 +185,9 @@
                       color: white;
                       margin-top: 20px;
                     "
+                    (click)="setOrderToSave('Paypal')"
                   >
-                    Open Paypal
+                    Pay with Paypal
                     <img
                       class="pay-with"
                       src="../../assets/img/paypal.svg"
@@ -221,8 +204,8 @@
       <div class="right__content">
         <div class="bill__cover bg-white">
           <div>
-            <p>Total: {{ countItemsBasket }} items</p>
-            <p>${{ totalPrice }}</p>
+            <p>Total: {{ totalItems }} items</p>
+            <p>${{ totalPrice }}.00</p>
           </div>
 
           <div>
@@ -235,7 +218,7 @@
             <p>
               <strong>Total to pay: </strong>
             </p>
-            <p>${{ totalPrice }}</p>
+            <p>${{ totalPrice }}.00</p>
           </div>
         </div>
       </div>
@@ -262,8 +245,8 @@
       <div class="modal-body">
         <div class="bill__cover bg-secondary">
           <div>
-            <p>Total: {{ countItemsBasket }} items</p>
-            <p style="font-weight: 700">${{ totalPrice }}</p>
+            <p>Total: {{ totalItems }} items</p>
+            <p style="font-weight: 700">${{ totalPrice }}.00</p>
           </div>
 
           <div>
@@ -271,8 +254,14 @@
             <p style="font-weight: 700">5-7 days</p>
           </div>
 
-          <button type="button" class="btn btn-primary btn-view-order w-50">
-            View Order
+          <button
+            type="button"
+            class="btn btn-primary btn-view-order w-50"
+            (click)="
+              viewOrder(customerInfo.order[customerInfo.order.length - 1])
+            "
+          >
+            Go Home
           </button>
         </div>
       </div>

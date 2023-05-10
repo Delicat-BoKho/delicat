@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Product, ProductDetail } from '../models/product';
 import { async } from 'rxjs';
+import { CartItem } from '../models/cart';
+import { CustomerService } from '../services/customer.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -32,7 +34,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private _router: Router,
-    private service: ProductService
+    private service: ProductService,
+    private _cService: CustomerService
   ) {
     activateRoute.paramMap.subscribe((param) => {
       let id = param.get('id');
@@ -51,10 +54,7 @@ export class ProductDetailComponent implements OnInit {
   getProductById(id: any) {
     this.service.getProduct(id).subscribe({
       next: (res: any) => {
-        console.log('Vào gọi sản phẩm');
         this.productDetail = res;
-        // this.productDetailShow = res;
-        console.log(this.productDetail);
 
         this.mainImg = this.productDetail.imgURL[0];
         this.subImg_0 = this.productDetail.imgURL[0];
@@ -66,7 +66,6 @@ export class ProductDetailComponent implements OnInit {
         this.colorChecked = this.productDetail.color[0];
 
         this.setProductToBuy();
-        console.log(this.productDetailBuy);
       },
       error: (err) => {
         this.errMessage = err;
@@ -87,7 +86,6 @@ export class ProductDetailComponent implements OnInit {
     this.productDetailBuy.color = this.productDetail.color[0];
     this.productDetailBuy.reviews = this.productDetail.reviews;
     this.productDetailBuy.quantity = 1;
-    console.log(this.productDetailBuy);
   }
 
   // change img show
@@ -145,6 +143,52 @@ export class ProductDetailComponent implements OnInit {
     return ratingStar;
   }
 
+  // add to Cart()
+  addToCart() {
+    const cartItem = new CartItem();
+    cartItem.id = this.productDetailBuy.id;
+    cartItem.productId = this.productDetailBuy.id;
+    cartItem.quantity = this.productDetailBuy.quantity;
+    cartItem.description =
+      this.productDetailBuy.color + ',' + this.productDetailBuy.size;
+
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    // Đã login
+    if (typeof customerId !== 'undefined') {
+      this._cService.saveCart(customerId, cartItem);
+      this.viewBasket();
+    }
+    // Chưa login
+    else {
+      const cartLocalStorage = localStorage.getItem('cart');
+      let myArray: CartItem[] = [];
+
+      if (cartLocalStorage) {
+        // Đã có cart dưới localStorage
+        myArray = JSON.parse(cartLocalStorage);
+
+        const itemExists = myArray.some((item) => item.id === cartItem.id);
+
+        if (!itemExists) {
+          myArray.push(cartItem);
+
+          localStorage.setItem('cart', JSON.stringify(myArray));
+        } else {
+          alert('Item already exits in cart!');
+        }
+      }
+      // Chưa tổn tại cart dưới localStorage --> Tạo cart dưới localStorage
+      else {
+        myArray.push(cartItem);
+        localStorage.setItem('cart', JSON.stringify(myArray));
+      }
+    }
+
+    console.log(cartItem);
+  }
+
   viewBasket() {
     this._router.navigate(['basket']);
   }
@@ -152,55 +196,4 @@ export class ProductDetailComponent implements OnInit {
   viewPayment() {
     this._router.navigate(['payment']);
   }
-
-  //================ OLD =================//
-
-  // addToCart() {
-  //   let basket: BasketModel = JSON.parse(localStorage.getItem('basket')!);
-  //   if (basket == null) {
-  //     basket = {
-  //       productDetails: [],
-  //       total: 0,
-  //       totalToPay: 0,
-  //     };
-  //   }
-  //   basket.productDetails.push(this.productDetail);
-  //   localStorage.setItem('basket', JSON.stringify(basket));
-  // }
-
-  // async loadListItems() {
-  //   let jsonItemsSuit = await this.api.loadDataJson(
-  //     '../../assets/data/products_suit.json'
-  //   );
-
-  //   let jsonItemsAccessories = await this.api.loadDataJson(
-  //     '../../assets/data/products_accessories.json'
-  //   );
-
-  //   this.listItems = jsonItemsSuit.concat(jsonItemsAccessories);
-
-  //   this.product = this.listItems.find((item) => item.id == this.idSearch)!;
-
-  // }
-
-  // await this.loadListItems();
-  // this.productDetail = {
-  //   id: this.product.id,
-  //   name: this.product.name,
-  //   price: this.product.price,
-  //   imgURL: this.product.imgURL[0],
-  //   describe: this.product.describe,
-  //   tag: this.product.tag,
-  //   quantity: 0,
-  //   size: ' ',
-  //   color: ' ',
-  //   reviews: this.product.reviews,
-  // };
-  // this.ratingStar = Array(this.productDetail.reviews.ratingStar).fill(0);
-  // this.ratingStarGray = Array(5 - this.ratingStar.length).fill(0);
-  // this.ratingStar = Array(this.getRatingStar()).fill(0);
-  // this.ratingStarGray = Array(5 - this.ratingStar.length).fill(0);
-  // console.log(this.productDetail);
-
-  // idSearch: string = new URLSearchParams(window.location.search).get('id')!;
 }

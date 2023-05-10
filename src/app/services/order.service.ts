@@ -27,4 +27,42 @@ export class OrderService {
       }))
     );
   }
+
+  // post - put
+  saveMetaDataOfFile(order: Order) {
+    const myDoc = this.fireStore.collection('/Order').doc(order.id);
+
+    const saleProductsRef = myDoc.collection('saleProducts');
+
+    const orderMeta = {
+      deliveryAddress: order.deliveryAddress,
+      id: order.id,
+      customerId: order.customerId,
+      total: order.total,
+      dateCreated: order.dateCreated,
+      paymentMethod: order.paymentMethod,
+      status: order.status,
+    };
+
+    order.saleProducts.forEach((saleProduct) => {
+      console.log(saleProduct);
+      const subCollection = saleProductsRef.doc(saleProduct.productId).ref;
+      subCollection.set({
+        description: saleProduct.description,
+        productId: saleProduct.productId,
+        quantity: saleProduct.quantity,
+        unitPrice: saleProduct.unitPrice,
+      });
+    });
+
+    //đẩy data lên
+    myDoc
+      .set(orderMeta)
+      .then(() => {
+        console.log('Document successfully written!');
+      })
+      .catch((error) => {
+        console.error('Error writing document: ', error);
+      });
+  }
 }

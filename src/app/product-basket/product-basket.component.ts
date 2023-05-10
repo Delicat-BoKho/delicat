@@ -15,6 +15,7 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductBasketComponent implements OnInit {
   @Input() cartItem!: CartItem;
+
   productDetail: Product = new Product();
 
   sizeChose: string = '';
@@ -55,68 +56,91 @@ export class ProductBasketComponent implements OnInit {
     return [size, color];
   }
 
-  // get customer by Id
-  // getCustomerById() {
-  //   // console.log('Vào get customer by id');
-  //   const token = localStorage.getItem('token')?.toString();
-  //   const customerId = token?.replace(/"/g, '');
+  // change quantity
+  changeQuantity(quantity: number) {
+    if (this.cartItem.quantity <= 1 && quantity < 0) {
+      this.cartItem.quantity == 0;
+      this.removeFromBasket();
+      return;
+    }
+    this.cartItem.quantity += quantity;
 
-  //   if (customerId == null) {
-  //     this._router.navigate(['login']);
-  //   } else {
-  //     this._cService.getCustomerById(customerId).subscribe({
-  //       next: (res) => {
-  //         // this.customerInfo = res;
-  //       },
-  //       error: (err) => {
-  //         this.errMessage = err;
-  //       },
-  //     });
-  //   }
-  // }
-
-  basket: BasketModel = localStorage.getItem('basket')
-    ? JSON.parse(localStorage.getItem('basket')!)
-    : {
-        productDetails: [],
-        total: 0,
-        totalToPay: 0,
-      };
-
-  productBasket: Product = new Product();
-
-  removeFromBasket(productDetailId: string) {
-    this.basket.productDetails = this.basket.productDetails.filter(
-      (p) => p.id !== productDetailId
-    );
-    localStorage.setItem('basket', JSON.stringify(this.basket));
-    window.location.reload();
+    this.updateQuantity(this.cartItem);
   }
 
-  updateQuantity(customerId: string, cartItem: CartItem) {
+  // remove item
+  removeFromBasket() {
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
     // Đã login
+    if (typeof customerId !== 'undefined') {
+      // this._cService.saveCart(customerId, cartItem);
+      this._cService.deleteCartItem(customerId, this.cartItem);
+    }
+    // Chưa login --> Lưu localStorage
+    else {
+      const cartLocalStorage = localStorage.getItem('cart');
+      let myArray: CartItem[] = [];
 
-    // Chưa login
+      // Chưa login: kiểm tra đã tồn tại cart trong localStorage chưa
+      if (cartLocalStorage) {
+        myArray = JSON.parse(cartLocalStorage);
 
-    cartItem.quantity = 6;
+        const itemExists = myArray.some((item) => item.id === this.cartItem.id);
 
-    console.log('Hello');
-    console.log(customerId, cartItem);
+        if (itemExists) {
+          myArray = myArray.filter((item) => item.id !== this.cartItem.id);
 
-    this._cService.saveCart(customerId, cartItem);
+          localStorage.setItem('cart', JSON.stringify(myArray));
+          window.location.reload();
+        } else {
+          alert('Item not already exits in cart!');
+        }
+      }
+    }
+  }
+
+  // update quantity
+  updateQuantity(cartItem: CartItem) {
+    const token = localStorage.getItem('token')?.toString();
+    const customerId = token?.replace(/"/g, '');
+
+    // Đã login
+    if (typeof customerId !== 'undefined') {
+      this._cService.saveCart(customerId, cartItem);
+    }
+    // Chưa login --> Check localStorage
+    else {
+      const cartLocalStorage = localStorage.getItem('cart');
+      let myArray: CartItem[] = [];
+
+      // Chưa login: kiểm tra đã tồn tại cart trong localStorage chưa
+      if (cartLocalStorage) {
+        myArray = JSON.parse(cartLocalStorage);
+
+        const itemExists = myArray.some((item) => item.id === cartItem.id);
+
+        if (itemExists) {
+          let itemToUpdate = myArray.find((item) => item.id === cartItem.id);
+
+          if (itemToUpdate) {
+            itemToUpdate.quantity = cartItem.quantity;
+            localStorage.setItem('cart', JSON.stringify(myArray));
+          }
+          // myArray.push(cartItem);
+
+          localStorage.setItem('cart', JSON.stringify(myArray));
+          window.location.reload();
+        } else {
+          alert('Item not already exits in cart!');
+        }
+      }
+    }
+  }
+
+  // view productDetail
+  viewProductDetail(productId: string) {
+    this._router.navigate(['shop/product-detail', productId]);
   }
 }
-
-// productDetail!: ProductDetailModel;
-
-// changeQuantity(quantity: number) {
-//   if (this.productDetail.quantity <= 0 && quantity < 0) {
-//     this.productDetail.quantity == 0;
-//     return;
-//   }
-//   this.productDetail.quantity += quantity;
-// }
-
-// redirectToProductDetail() {
-//   window.location.href = '/shop/product-detail?id=' + this.productBasket.id;
-// }

@@ -18,7 +18,7 @@
   >
     <div class="left-content flex-grow-1">
       <p>
-        <strong>5 items</strong>
+        <strong>{{ totalItems }} items</strong>
       </p>
 
       <app-product-basket
@@ -30,8 +30,8 @@
     <div class="right-content">
       <div class="bill__cover">
         <div>
-          <p>Total: 5 items</p>
-          <p>$500.00</p>
+          <p>Total: {{ totalItems }} items</p>
+          <p>${{ totalPrice }}.00</p>
         </div>
 
         <div>
@@ -42,7 +42,7 @@
         <hr />
         <div>
           <p><strong>Total to pay:</strong></p>
-          <p>$500.00</p>
+          <p>${{ totalPrice }}.00</p>
         </div>
       </div>
 

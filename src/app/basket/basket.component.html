@@ -18,20 +18,20 @@
   >
     <div class="left-content flex-grow-1">
       <p>
-        <strong>{{ countItem }} items</strong>
+        <strong>5 items</strong>
       </p>
-      <!-- <div *ngFor="let item of basket.productDetails"> -->
-      <!-- /*Button close*/ -->
-      <!-- <app-product-basket [productBasket]="item"> </app-product-basket> -->
-      <!-- </div> -->
-      <button (click)="updateCart(customerInfo.id, cartItemTemp)">SAVE</button>
+
+      <app-product-basket
+        *ngFor="let item of cartItems"
+        [cartItem]="item"
+      ></app-product-basket>
     </div>
 
     <div class="right-content">
       <div class="bill__cover">
         <div>
-          <p>Total: {{ countItem }} items</p>
-          <p>${{ totalPrice }}</p>
+          <p>Total: 5 items</p>
+          <p>$500.00</p>
         </div>
 
         <div>
@@ -42,17 +42,14 @@
         <hr />
         <div>
           <p><strong>Total to pay:</strong></p>
-          <p>${{ totalPrice }}</p>
+          <p>$500.00</p>
         </div>
       </div>
 
-      <button
-        type="button"
-        class="btn btn-primary btn-pay"
-        (click)="redirectToProductDetail()"
-      >
+      <button type="button" class="btn btn-primary btn-pay" (click)="payment()">
         PAY
       </button>
     </div>
   </div>
 </div>
+<!-- </div> -->

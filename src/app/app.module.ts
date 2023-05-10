@@ -38,6 +38,7 @@ import { BlogItemComponent } from './blog-item/blog-item.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { OrderItemComponent } from './order-item/order-item.component';
 import { OrderComponent } from './order/order.component';
+import { OrderItemDetailComponent } from './order-item-detail/order-item-detail.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { OrderComponent } from './order/order.component';
     MyAccountComponent,
     OrderItemComponent,
     OrderComponent,
+    OrderItemDetailComponent,
   ],
   imports: [
     BrowserModule,

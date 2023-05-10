@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CustomerService } from '../services/customer.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { OrderService } from '../services/order.service';
 import { AccountService } from '../services/account.service';
 import { User } from '../models/user';
@@ -24,6 +24,12 @@ export class MyAccountComponent {
     private _aService: AccountService,
     private _router: Router
   ) {
+    this._router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0); // Scroll to top of page
+      }
+    });
+
     this.getCustomerById();
   }
 

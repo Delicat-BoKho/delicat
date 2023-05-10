@@ -67,13 +67,13 @@ export class OrderItemComponent {
 
   splitDescribe(describe: string): [string, string] {
     var temp = describe.split(',');
-    var size = temp[0];
-    var color = temp[1];
+    var color = temp[0];
+    var size = temp[1];
     return [size, color];
   }
 
-  // view order detail
-  viewOrderDetail(f: string) {
-    this._router.navigate(['user/order/:id', f]);
+  // view orderDetail
+  viewOrderDetail(orderId: string) {
+    this._router.navigate(['user/order', orderId]);
   }
 }

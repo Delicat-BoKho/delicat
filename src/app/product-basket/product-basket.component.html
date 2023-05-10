@@ -1,43 +1,26 @@
 <div class="container-product-basket d-flex justify-content-between">
   <div class="d-flex">
     <div class="img">
-      <img
-        src=""
-        alt=""
-        [src]="'../assets/img/' + productBasket.imgURL"
-        (click)="redirectToProductDetail()"
-      />
+      <img src="" alt="" [src]="productDetail.imgURL[0]" />
     </div>
 
     <div class="product-item">
-      <h4 class="title" (click)="redirectToProductDetail()">
-        {{ productBasket.name }}
+      <h4 class="title">
+        {{ productDetail.name }}
       </h4>
 
       <div class="d-flex choose__size__color">
-        <p class="size">Size: {{ productBasket.size }}</p>
-        <p class="color">Color: {{ productBasket.color }}</p>
+        <p class="size">Size: {{ sizeChose }}</p>
+        <p class="color">Color: {{ colorChose }}</p>
       </div>
 
       <div class="choose__quantity d-flex align-items-center">
-        <button
-          type="button"
-          class="btn btn-light btn-lg"
-          (click)="changeQuantity(-1)"
-        >
-          -
-        </button>
-        <p id="quantity">{{ productBasket.quantity }}</p>
-        <button
-          type="button"
-          class="btn btn-light btn-lg"
-          (click)="changeQuantity(1)"
-        >
-          +
-        </button>
+        <button type="button" class="btn btn-light btn-lg">-</button>
+        <p id="quantity">1</p>
+        <button type="button" class="btn btn-light btn-lg">+</button>
       </div>
 
-      <h5 class="price">${{ productBasket.price }}.00</h5>
+      <h5 class="price">${{ productDetail.price * cartItem.quantity }}.00</h5>
     </div>
   </div>
 

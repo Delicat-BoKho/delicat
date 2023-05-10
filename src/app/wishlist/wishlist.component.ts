@@ -35,8 +35,6 @@ export class WishlistComponent {
     const token = localStorage.getItem('token')?.toString();
     const customerId = token?.replace(/"/g, '');
 
-    console.log(1);
-
     if (typeof customerId !== 'undefined') {
       this._cService.getCustomerById(customerId).subscribe({
         next: (res) => {
@@ -57,7 +55,6 @@ export class WishlistComponent {
         myArray = JSON.parse(wishlishLocalStorage);
 
         this.wishlistProductIds = myArray;
-        console.log(this.wishlistProductIds);
         this.getProductsWishList();
       }
     }
@@ -68,7 +65,6 @@ export class WishlistComponent {
     this.service.getProductsByIds(this.wishlistProductIds).subscribe({
       next: (res: any) => {
         this.products = res;
-        console.log(this.products);
 
         if (this.products.length > 0) {
           this.isHaveProduct = false;

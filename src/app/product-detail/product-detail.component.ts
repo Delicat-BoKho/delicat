@@ -149,7 +149,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   // add to Cart()
-  addToCart() {
+  addToCart(type: string) {
     const cartItem = new CartItem();
     cartItem.id = this.productDetailBuy.id;
     cartItem.productId = this.productDetailBuy.id;
@@ -164,7 +164,7 @@ export class ProductDetailComponent implements OnInit {
     // Đã login
     if (typeof customerId !== 'undefined') {
       this._cService.saveCart(customerId, cartItem);
-      this.viewBasket();
+      // this.viewBasket();
     }
     // Chưa login
     else {
@@ -192,7 +192,9 @@ export class ProductDetailComponent implements OnInit {
       }
     }
 
-    console.log(cartItem);
+    if (type === 'buy') {
+      this.viewBasket();
+    }
   }
 
   viewBasket() {

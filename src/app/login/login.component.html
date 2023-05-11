@@ -40,8 +40,12 @@
       <span>OR</span>
       <div class="line r"></div>
     </div>
-    <div class="form-social-button">
-      <a href="#" class="social-button" id="facebook-connect">
+    <div class="form-social-button" style="cursor: pointer">
+      <a
+        class="social-button"
+        id="facebook-connect"
+        (click)="signInWithGoogle()"
+      >
         <img src="../../assets/img/google_icon.png" alt="" /> Log in with
         Google</a
       >

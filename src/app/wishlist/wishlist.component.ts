@@ -35,6 +35,7 @@ export class WishlistComponent {
     const token = localStorage.getItem('token')?.toString();
     const customerId = token?.replace(/"/g, '');
 
+    // Đã login
     if (typeof customerId !== 'undefined') {
       this._cService.getCustomerById(customerId).subscribe({
         next: (res) => {
@@ -46,7 +47,9 @@ export class WishlistComponent {
           this.errMessage = err;
         },
       });
-    } else {
+    }
+    // Chưa login
+    else {
       const wishlishLocalStorage = localStorage.getItem('wishlist');
       let myArray = [];
 
@@ -55,7 +58,11 @@ export class WishlistComponent {
         myArray = JSON.parse(wishlishLocalStorage);
 
         this.wishlistProductIds = myArray;
-        this.getProductsWishList();
+
+        if (this.wishlistProductIds.length != 0) {
+          // this.isHaveProduct = true
+          this.getProductsWishList();
+        }
       }
     }
   }

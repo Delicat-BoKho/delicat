@@ -117,12 +117,16 @@
                 selectColorDefault === '' ||
                 selectSizeDefault === ''
               "
-              (click)="addToCart()"
+              (click)="addToCart('add')"
             >
               Add to cart
             </button>
 
-            <button type="button" class="btn btn-primary" (click)="addToCart()">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="addToCart('buy')"
+            >
               Buy now
             </button>
           </div>

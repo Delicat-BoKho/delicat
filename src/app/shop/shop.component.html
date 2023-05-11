@@ -578,11 +578,21 @@
           [(ngModel)]="searchProduct"
         />
         <button
-          class="btn btn-outline-secondary btn-primary"
+          class="btn btn-primary"
           type="button"
           id="button-addon2"
+          (click)="search()"
         >
           Search
+        </button>
+
+        <button
+          style="color: black"
+          class="btn btn-outline-secondary btn-secondary"
+          type="button"
+          (click)="resetItem()"
+        >
+          Reset
         </button>
       </div>
 

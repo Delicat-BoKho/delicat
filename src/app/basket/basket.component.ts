@@ -85,6 +85,8 @@ export class BasketComponent implements OnInit {
         for (let item of this.cartItems) {
           this.getProductById(item.productId, item.quantity);
         }
+
+        this.totalItems = this.cartItems.length;
       }
     }
   }

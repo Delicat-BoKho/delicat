@@ -1,72 +1,18 @@
 <div class="container__blog-detail">
   <h1 class="blog-detail__title">
-    Best men’s winter style for quality and cool
+    {{ blogDetail.title }}
   </h1>
-  <img class="blog-detail__img" src="../../assets/img/blog__img1.png" alt="" />
+  <img class="blog-detail__img" [src]="blogDetail.img" alt="" />
   <div class="blog-detail__source">
-    <span id="source__author">By Ellie Davis</span>
-    <span id="source__line">|</span>
-    <span id="source__date">Dec 26, 2022</span>
+    <span id="source__author"
+      >{{ blogDetail.author }} | {{ blogDetail.date }}</span
+    >
+    <!-- <span id="source__line">|</span> -->
+    <!-- <span id="source__date">{{ blogDetail.date }}</span> -->
   </div>
 
-  <div class="blog-detail__content">
-    <div class="content">
-      The future of office life has never been more in flux.
-    </div>
-    <div class="content">
-      While the 9-5, and five full days a week spent at your work HQ was par for
-      the course only a year ago, the forced WFH revolution has left companies
-      taking stock of the future of their workplaces.
-    </div>
-    <div class="content">
-      For many, this may mean home is where the heart is as well as the daily
-      grind, but for others, office life will always be a fixture of their
-      industry. This may mean a much-needed upgrade to your suit collection is
-      in order.
-    </div>
-    <div class="content">
-      Love or hate this daily uniform, it certainly takes the stress out of the
-      dressing process. Throwing on a suit gives instant sophistication and gets
-      you mentally and of course, sartorially ready for the day.
-    </div>
-    <div class="content">
-      <div class="content__title">blazer</div>
-
-      A design classic, style a Jacket into winter for an effortlessly cool
-      layer that keeps rain and snow firmly at bay. All but essential for living
-      with the UK's weather, the archetypal mac is crafted in hard-wearing
-      waterproof cotton, with a loose yet streamlined silhouette that lends
-      itself to being dressed up or down with ease - equally at home on city
-      streets as a country walk.
-    </div>
-    <div class="content">
-      <div class="content__title">shirt</div>
-      A design classic, style a Jacket into winter for an effortlessly cool
-      layer that keeps rain and snow firmly at bay. All but essential for living
-      with the UK's weather, the archetypal mac is crafted in hard-wearing
-      waterproof cotton, with a loose yet streamlined silhouette that lends
-      itself to being dressed up or down with ease - equally at home on city
-      streets as a country walk.
-    </div>
-    <div class="content">
-      <div class="content__title">trouser</div>
-      A design classic, style a Jacket into winter for an effortlessly cool
-      layer that keeps rain and snow firmly at bay. All but essential for living
-      with the UK's weather, the archetypal mac is crafted in hard-wearing
-      waterproof cotton, with a loose yet streamlined silhouette that lends
-      itself to being dressed up or down with ease - equally at home on city
-      streets as a country walk.
-    </div>
-    <div class="content">
-      Functional and fashionable, they are styled alongside a simple crew-neck
-      t-shirt but still offer an innate sophistication without the need to add a
-      shirt. Shop tuxedos, linen styles or three-pieces with all preferences
-      covered.
-    </div>
-    <div class="btn">
-      <button id="btn--all">
-        <a href="blog/blog-detail">Read more blogs</a>
-      </button>
-    </div>
+  <div class="blog-detail__content" [innerHTML]="blogDetail.content"></div>
+  <div class="btn">
+    <button id="btn--all" (click)="viewBlog()">Read more blogs</button>
   </div>
 </div>

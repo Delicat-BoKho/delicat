@@ -77,6 +77,11 @@ hr {
   background-color: #9a9a9a;
 }
 
+#flexCheckChecked-navy:not(:checked),
+#flexCheckChecked-navy:checked {
+  background-color: #385170;
+}
+
 .all__tags {
   margin-top: 20px;
 }
@@ -104,6 +109,11 @@ hr {
   align-items: center;
   justify-content: space-between;
   background-color: white;
+}
+
+.search__item {
+  padding: 0 150px;
+  margin-top: 20px;
 }
 
 /* .header__right__content {
@@ -147,6 +157,10 @@ hr {
 
   .list__item {
     justify-content: space-around !important;
+  }
+
+  .search__item {
+    padding: 0 30px;
   }
 }
 

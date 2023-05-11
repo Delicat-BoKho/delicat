@@ -1,6 +1,9 @@
 .container-product-basket {
-  width: 90%;
+  width: 80%;
   margin-bottom: 20px;
+  background-color: whitesmoke;
+  padding: 25px;
+  border-radius: 5px;
 }
 
 .container-product-basket:hover {
@@ -30,7 +33,7 @@
 }
 
 .choose__size__color > p:first-child {
-  width: 80px;
+  width: 120px;
 }
 
 .choose__quantity {
@@ -65,4 +68,10 @@
 
 .price {
   margin-top: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .container-product-basket {
+    width: 100%;
+  }
 }

@@ -21,7 +21,7 @@
               aria-expanded="true"
               aria-controls="panelsStayOpen-collapseOne"
             >
-              SUIT
+              SUITS
             </button>
           </h2>
           <div
@@ -36,11 +36,11 @@
                   class="form-check-input"
                   type="checkbox"
                   value=""
-                  id="flexCheckChecked-Suiting"
-                  (click)="filter($event, 'suiting', 'tag')"
+                  id="flexCheckChecked-Suits"
+                  (click)="filter($event, 'suits', 'tag')"
                 />
-                <label class="form-check-label" for="flexCheckChecked-Suiting">
-                  Suiting
+                <label class="form-check-label" for="flexCheckChecked-Suits">
+                  Suits
                 </label>
               </div>
 
@@ -143,6 +143,32 @@
                 />
                 <label class="form-check-label" for="flexCheckDefault-Belts">
                   Belts
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault-Hats"
+                  (click)="filter($event, 'hats', 'tag')"
+                />
+                <label class="form-check-label" for="flexCheckDefault-Hats">
+                  Hats
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault-Scarves"
+                  (click)="filter($event, 'scarves', 'tag')"
+                />
+                <label class="form-check-label" for="flexCheckDefault-Scarves">
+                  Scarves
                 </label>
               </div>
             </div>
@@ -442,6 +468,19 @@
                   Gray
                 </label>
               </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckChecked-navy"
+                  (click)="filter($event, 'navy', 'color')"
+                />
+                <label class="form-check-label" for="flexCheckChecked-navy">
+                  Navy
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -493,6 +532,7 @@
 
     <div class="right__all__items flex-grow-1">
       <div class="d-flex header__right__content justify-content-end">
+        <!-- Sort By -->
         <div class="dropdown sort__item text-end d-flex">
           <button
             class="btn btn-secondary dropdown-toggle"
@@ -526,10 +566,41 @@
         </div>
       </div>
 
+      <!-- Search -->
+      <div class="search__item input-group mb-3 d-flex justify-content-center">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search product name..."
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+          name="search"
+          [(ngModel)]="searchProduct"
+        />
+        <button
+          class="btn btn-primary"
+          type="button"
+          id="button-addon2"
+          (click)="search()"
+        >
+          Search
+        </button>
+
+        <button
+          style="color: black"
+          class="btn btn-outline-secondary btn-secondary"
+          type="button"
+          (click)="resetItem()"
+        >
+          Reset
+        </button>
+      </div>
+
       <div class="list__item d-flex flex-wrap">
         <app-product-item
           *ngFor="let item of templistItemsFinal"
           [productDetail]="item"
+          [customerInfo]="customerInfo"
         ></app-product-item>
       </div>
     </div>

@@ -16,6 +16,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   { path: 'shop', component: ShopComponent },
@@ -27,7 +30,7 @@ const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'about', component: AboutUsComponent },
-  { path: 'shop/product-detail', component: ProductDetailComponent },
+  { path: 'shop/product-detail/:id', component: ProductDetailComponent },
   { path: 'basket', component: BasketComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'payment', component: PaymentComponent },
@@ -35,8 +38,10 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'account-info', component: AccountInfoComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'blog/blog-detail', component: BlogDetailComponent },
-  // {path: 'reset-password', component: Reset-}
+  { path: 'blog/blog-detail/:id', component: BlogDetailComponent },
+  { path: 'wishlist', component: WishlistComponent },
+  { path: 'user/profile', component: MyAccountComponent },
+  { path: 'user/order/:id', component: OrderComponent },
 ];
 
 @NgModule({

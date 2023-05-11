@@ -5,6 +5,7 @@ import { Product, ProductDetail } from '../models/product';
 import { async } from 'rxjs';
 import { CartItem } from '../models/cart';
 import { CustomerService } from '../services/customer.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,6 +18,9 @@ export class ProductDetailComponent implements OnInit {
 
   // sản phẩm bán được thêm vào cart
   productDetailBuy: ProductDetail = new ProductDetail();
+
+  // get customerInfo --> cart
+  customer: User = new User();
 
   mainImg: string = '';
   subImg_0: string = '';
@@ -49,6 +53,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {}
 
   //=========================//
+  // get customer by Id
 
   // get product detail by id in url
   getProductById(id: any) {
@@ -152,6 +157,7 @@ export class ProductDetailComponent implements OnInit {
     cartItem.description =
       this.productDetailBuy.color + ',' + this.productDetailBuy.size;
 
+    // get token
     const token = localStorage.getItem('token')?.toString();
     const customerId = token?.replace(/"/g, '');
 

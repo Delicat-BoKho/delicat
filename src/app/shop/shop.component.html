@@ -532,6 +532,7 @@
 
     <div class="right__all__items flex-grow-1">
       <div class="d-flex header__right__content justify-content-end">
+        <!-- Sort By -->
         <div class="dropdown sort__item text-end d-flex">
           <button
             class="btn btn-secondary dropdown-toggle"
@@ -563,6 +564,26 @@
             </li>
           </ul>
         </div>
+      </div>
+
+      <!-- Search -->
+      <div class="search__item input-group mb-3 d-flex justify-content-center">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search product name..."
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+          name="search"
+          [(ngModel)]="searchProduct"
+        />
+        <button
+          class="btn btn-outline-secondary btn-primary"
+          type="button"
+          id="button-addon2"
+        >
+          Search
+        </button>
       </div>
 
       <div class="list__item d-flex flex-wrap">

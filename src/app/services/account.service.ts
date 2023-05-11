@@ -52,6 +52,8 @@ export class AccountService {
                     .collection('/Customer')
                     .doc(res.user?.uid);
 
+                  // const subCollection = myDoc.collection('cart').ref;
+
                   const customer = new User(); //Tạo mới customer theo cấu trúc của Customer
 
                   const customerMeta = {
@@ -62,8 +64,10 @@ export class AccountService {
                     address: customer.address,
                     wishlist: customer.wishlist,
                     order: customer.order,
-                    cart: customer.cart,
+                    // cart: customer.cart,
                   };
+
+                  // subCollection.set()
 
                   myDoc
                     .set(customerMeta)

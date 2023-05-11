@@ -139,6 +139,7 @@
                       color: white;
                       margin-top: 20px;
                     "
+                    (click)="setOrderToSave('Credit Card')"
                   >
                     Pay ${{ totalPrice }}.00
                   </button>
@@ -261,7 +262,7 @@
               viewOrder(customerInfo.order[customerInfo.order.length - 1])
             "
           >
-            Go Home
+            View Order
           </button>
         </div>
       </div>

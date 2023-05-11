@@ -16,7 +16,7 @@ export class ProductService {
   // get all items
   getProducts() {
     return this.fireStore
-      .collection('/ProductTemp', (ref) => ref.limit(12))
+      .collection('/ProductTemp')
       .snapshotChanges()
       .pipe(
         map((products) => {

@@ -142,10 +142,10 @@ export class PaymentComponent implements OnInit {
   }
 
   setOrderToSave(paymentMethod: string) {
-    this.orderToSave.id = 'SO004';
+    // this.orderToSave.id = 'SO004';
     this.orderToSave.customerId = this.customerInfo.id;
     this.orderToSave.dateCreated = this.currentDate;
-    this.orderToSave.dateCreated = '2023-05-11';
+    // this.orderToSave.dateCreated = '2023-05-11';
     this.orderToSave.deliveryAddress = this.address;
 
     this.orderToSave.saleProducts = this.saleProductToSave;
@@ -162,6 +162,7 @@ export class PaymentComponent implements OnInit {
     // save changes
     this.customerInfo.order.push(this.orderToSave.id);
     this.saveOrderToCustomer();
+    this.removeCartItem();
   }
 
   convertCurrentDate() {
@@ -184,5 +185,9 @@ export class PaymentComponent implements OnInit {
   // save customer Info by Id
   saveOrderToCustomer() {
     this._cService.saveMetaDataOfFile(this.customerInfo);
+  }
+
+  removeCartItem() {
+    this._cService.deleteCart(this.orderToSave.customerId);
   }
 }

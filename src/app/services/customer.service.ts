@@ -32,7 +32,10 @@ export class CustomerService {
     // create new or put item parameter
     const myDoc = this.fireStore.collection('/Customer').doc(customer.id);
 
-    const subCollection = myDoc.collection('cart').doc(customer.cart[0].id).ref;
+    console.log(customer.id);
+    console.log(customer);
+
+    const cartRef = myDoc.collection('cart');
 
     const customerMeta = {
       id: customer.id,
@@ -59,6 +62,7 @@ export class CustomerService {
 
     customer.cart.forEach((cartItem) => {
       console.log(cartItem.id);
+      const subCollection = cartRef.doc(cartItem.id).ref;
       subCollection
         .set({
           productId: cartItem.productId,
@@ -79,7 +83,13 @@ export class CustomerService {
     // create new or put item parameter
     const myDoc = this.fireStore.collection('/Customer').doc(customerId);
 
-    const subCollection = myDoc.collection('cart').doc(cartItem.productId).ref;
+    // const cartItemId = this.fireStore.createId()
+    const temp = cartItem.description.split(',');
+    const cartItemId = cartItem.productId + temp[0] + temp[1];
+
+    const subCollection = myDoc.collection('cart').doc(cartItemId).ref;
+
+    // if()
 
     subCollection
       .set({
@@ -156,6 +166,28 @@ export class CustomerService {
       })
       .catch((error) => {
         console.error('Error writing document: ', error);
+      });
+  }
+
+  async deleteCart(customerId: string) {
+    const customerDocRef = this.fireStore
+      .collection('/Customer')
+      .doc(customerId);
+
+    const cartCollectionRef = customerDocRef.collection('cart').ref;
+
+    const batch = this.fireStore.firestore.batch();
+
+    const deleteCartQuery = await cartCollectionRef.limit(500).get();
+    deleteCartQuery.forEach((doc) => batch.delete(doc.ref));
+
+    batch
+      .commit()
+      .then(() => {
+        console.log('Product and reviews successfully deleted');
+      })
+      .catch((error) => {
+        console.error('Error deleting product and reviews: ', error);
       });
   }
 }

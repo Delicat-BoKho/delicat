@@ -111,6 +111,11 @@ hr {
   background-color: white;
 }
 
+.search__item {
+  padding: 0 150px;
+  margin-top: 20px;
+}
+
 /* .header__right__content {
   padding: 0 2rem;
 } */
@@ -152,6 +157,10 @@ hr {
 
   .list__item {
     justify-content: space-around !important;
+  }
+
+  .search__item {
+    padding: 0 30px;
   }
 }
 

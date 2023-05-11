@@ -30,6 +30,8 @@ export class OrderService {
 
   // post - put
   saveMetaDataOfFile(order: Order) {
+    order.id = this.fireStore.createId();
+
     const myDoc = this.fireStore.collection('/Order').doc(order.id);
 
     const saleProductsRef = myDoc.collection('saleProducts');
@@ -46,7 +48,11 @@ export class OrderService {
 
     order.saleProducts.forEach((saleProduct) => {
       console.log(saleProduct);
-      const subCollection = saleProductsRef.doc(saleProduct.productId).ref;
+      // const cartItemId = this.fireStore.createId()
+      const temp = saleProduct.description.split(',');
+      const saleProductId = saleProduct.productId + temp[0] + temp[1];
+
+      const subCollection = saleProductsRef.doc(saleProductId).ref;
       subCollection.set({
         description: saleProduct.description,
         productId: saleProduct.productId,

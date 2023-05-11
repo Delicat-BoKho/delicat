@@ -55,7 +55,7 @@ export class ProductItemComponent implements OnInit {
     // Chưa login --> Lưu vào localStorage
     if (typeof token === 'undefined') {
       const wishlishLocalStorage = localStorage.getItem('wishlist');
-      let myArray = [];
+      let myArray: string[] = [];
 
       // Chưa login: kiểm tra đã tồn tại wishlist trong localStorage chưa
       if (wishlishLocalStorage) {
@@ -70,6 +70,11 @@ export class ProductItemComponent implements OnInit {
         } else {
           alert('Item already exists in wishlist!');
         }
+      }
+      // Chưa tổn tại wishlist dưới localStorage --> Tạo wishlist dưới localStorage
+      else {
+        myArray.push(productId);
+        localStorage.setItem('wishlist', JSON.stringify(myArray));
       }
     }
 

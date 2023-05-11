@@ -32,7 +32,10 @@ export class CustomerService {
     // create new or put item parameter
     const myDoc = this.fireStore.collection('/Customer').doc(customer.id);
 
-    const subCollection = myDoc.collection('cart').doc(customer.cart[0].id).ref;
+    console.log(customer.id);
+    console.log(customer);
+
+    const cartRef = myDoc.collection('cart');
 
     const customerMeta = {
       id: customer.id,
@@ -59,6 +62,7 @@ export class CustomerService {
 
     customer.cart.forEach((cartItem) => {
       console.log(cartItem.id);
+      const subCollection = cartRef.doc(cartItem.id).ref;
       subCollection
         .set({
           productId: cartItem.productId,
@@ -72,13 +76,6 @@ export class CustomerService {
           console.error('Error writing document: ', error);
         });
     });
-    // subCollection
-    //   .set({
-    //     id: customer.cart[0].id,
-    //     productId: customer.cart[0].productId,
-    //     quantity: customer.cart[0].quantity,
-    //     description: customer.cart[0].description,
-    //   })
   }
 
   // post and put item
@@ -86,10 +83,13 @@ export class CustomerService {
     // create new or put item parameter
     const myDoc = this.fireStore.collection('/Customer').doc(customerId);
 
-    const subCollection = myDoc.collection('cart').doc(cartItem.productId).ref;
+    // const cartItemId = this.fireStore.createId()
+    const temp = cartItem.description.split(',');
+    const cartItemId = cartItem.productId + temp[0] + temp[1];
 
-    console.log('customer.cart');
-    console.log(cartItem);
+    const subCollection = myDoc.collection('cart').doc(cartItemId).ref;
+
+    // if()
 
     subCollection
       .set({
@@ -107,14 +107,27 @@ export class CustomerService {
   }
 
   // post and put item
+  deleteCartItem(customerId: string, cartItem: CartItem) {
+    // create new or put item parameter
+    const myDoc = this.fireStore.collection('/Customer').doc(customerId);
+
+    const subCollection = myDoc.collection('cart').doc(cartItem.productId);
+    subCollection
+      .delete()
+      .then(() => {
+        console.log('CartItem successfully deleted!');
+      })
+      .catch((error) => {
+        console.error('Error deleting document: ', error);
+      });
+  }
+
+  // post and put item
   saveWishlist(customerId: string, cartItem: CartItem) {
     // create new or put item parameter
     const myDoc = this.fireStore.collection('/Customer').doc(customerId);
 
     const subCollection = myDoc.collection('cart').doc(cartItem.productId).ref;
-
-    console.log('customer.cart');
-    console.log(cartItem);
 
     subCollection
       .set({
@@ -128,6 +141,53 @@ export class CustomerService {
       })
       .catch((error) => {
         console.error('Error writing document: ', error);
+      });
+  }
+
+  saveOrder(customer: User) {
+    // create new or put item parameter
+    const myDoc = this.fireStore.collection('/Customer').doc(customer.id);
+
+    const customerMeta = {
+      id: customer.id,
+      userName: customer.userName,
+      fullName: customer.fullName,
+      phone: customer.phone,
+      address: customer.address,
+      wishlist: customer.wishlist,
+      order: customer.order,
+    };
+
+    // push data to firebase
+    myDoc
+      .set(customerMeta)
+      .then(() => {
+        console.log('myDoc successfully written!');
+      })
+      .catch((error) => {
+        console.error('Error writing document: ', error);
+      });
+  }
+
+  async deleteCart(customerId: string) {
+    const customerDocRef = this.fireStore
+      .collection('/Customer')
+      .doc(customerId);
+
+    const cartCollectionRef = customerDocRef.collection('cart').ref;
+
+    const batch = this.fireStore.firestore.batch();
+
+    const deleteCartQuery = await cartCollectionRef.limit(500).get();
+    deleteCartQuery.forEach((doc) => batch.delete(doc.ref));
+
+    batch
+      .commit()
+      .then(() => {
+        console.log('Product and reviews successfully deleted');
+      })
+      .catch((error) => {
+        console.error('Error deleting product and reviews: ', error);
       });
   }
 }

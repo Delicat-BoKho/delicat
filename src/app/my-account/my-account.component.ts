@@ -61,6 +61,7 @@ export class MyAccountComponent {
     if (customerId == null) {
       this._router.navigate(['login']);
     } else {
+      console.log(this.customerInfo);
       this._cService.saveMetaDataOfFile(this.customerInfo);
     }
   }

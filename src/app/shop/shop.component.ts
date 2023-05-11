@@ -40,6 +40,8 @@ export class ShopComponent implements OnInit {
   products: Product[] = [];
   errMessage: string = '';
 
+  searchProduct: string = '';
+
   //===================//
   customerInfo!: User;
   wishlishLocalStorage: string[] = [];
@@ -109,6 +111,11 @@ export class ShopComponent implements OnInit {
         this.products = res;
 
         this.listItems = res;
+
+        for (let item of this.listItems) {
+          item.tag = item.tag.toLowerCase();
+        }
+
         this.templistItems = this.listItems;
         this.templistItemsFinal = this.listItems;
       },
@@ -220,5 +227,20 @@ export class ShopComponent implements OnInit {
     this.templistItemsFinal = this.templistItemsFinal.sort(
       (a, b) => (a.price - b.price) * -1
     );
+  }
+
+  // search
+  search() {
+    this.templistItemsFinal = [];
+    for (let i = 0; i < this.listItems.length; i++) {
+      const product = this.listItems[i];
+      if (
+        product.name.toLowerCase().includes(this.searchProduct.toLowerCase())
+      ) {
+        this.templistItemsFinal.push(product);
+      }
+    }
+    // this.productsTemp = this.templistItemsFinal;
+    // this.products = this.productsTemp;
   }
 }

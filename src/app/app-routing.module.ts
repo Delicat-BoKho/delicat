@@ -42,7 +42,6 @@ const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent },
   { path: 'user/profile', component: MyAccountComponent },
   { path: 'user/order/:id', component: OrderComponent },
-  // {path: 'reset-password', component: Reset-}
 ];
 
 @NgModule({

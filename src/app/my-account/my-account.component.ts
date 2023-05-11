@@ -18,6 +18,8 @@ export class MyAccountComponent {
   newPassword: string = '';
   confirmPassword: string = '';
 
+  isGoogleUser: boolean = false;
+
   constructor(
     private _cService: CustomerService,
     private _oService: OrderService,
@@ -29,6 +31,24 @@ export class MyAccountComponent {
         window.scrollTo(0, 0); // Scroll to top of page
       }
     });
+
+    const providerLocalStorage = localStorage.getItem('provider')?.toString();
+    let checkProvider = '';
+
+    if (providerLocalStorage) {
+      checkProvider = providerLocalStorage;
+      console.log(checkProvider);
+      if (checkProvider === 'Google') {
+        console.log(1);
+        this.isGoogleUser = true;
+      }
+
+      if (checkProvider === 'Email') {
+        console.log(2);
+
+        this.isGoogleUser = false;
+      }
+    }
 
     this.getCustomerById();
   }
@@ -76,6 +96,10 @@ export class MyAccountComponent {
         this.currentPassword,
         this.newPassword
       );
+
+      this.currentPassword = '';
+      this.newPassword = '';
+      this.confirmPassword = '';
     }
   }
 

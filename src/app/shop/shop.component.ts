@@ -240,7 +240,10 @@ export class ShopComponent implements OnInit {
         this.templistItemsFinal.push(product);
       }
     }
-    // this.productsTemp = this.templistItemsFinal;
-    // this.products = this.productsTemp;
+  }
+
+  resetItem() {
+    this.searchProduct = '';
+    this.templistItemsFinal = this.listItems;
   }
 }

@@ -30,10 +30,7 @@ export class AccountService {
     // sign in with email and password
     this.fireauth.signInWithEmailAndPassword(email, passwordHash).then(
       async (res) => {
-        console.log(1);
-
         if (res.user?.emailVerified == true) {
-          console.log(2);
           //đăng nhập thành công, kiểm tra xem customer này có trong collection customer chưa
           const docRefCustomer = firebase
             .firestore()
@@ -84,51 +81,12 @@ export class AccountService {
               // Handle errors
             });
 
-          // console.log(3);
-          // // Kiểm tra xem đã có user trong firebase chưa
-          // const docRefUser = firebase.firestore().doc('User/' + res.user?.uid);
-          // docRefUser
-          //   .get()
-          //   .then(
-          //     (
-          //       docSnapshot: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>
-          //     ) => {
-          //       if (docSnapshot.exists) {
-          //         // Nếu có rồi thì thôi
-          //       } else {
-          //         //Nếu chưa có thì tạo mới
-          //         const myDoc = this.fireStore
-          //           .collection('/User')
-          //           .doc(res.user?.uid);
-
-          //         const user = new Account(); //Tạo mới user theo cấu trúc của user
-
-          //         const userMeta = {
-          //           id: res.user?.uid,
-          //           userName: email,
-          //           role: user.role,
-          //         };
-
-          //         myDoc
-          //           .set(userMeta)
-          //           .then(() => {
-          //             console.log('Document successfully written!');
-          //           })
-          //           .catch((error) => {
-          //             console.error('Error writing document: ', error);
-          //           });
-          //       }
-          //     }
-          //   )
-          //   .catch((error: Error) => {
-          //     // Handle errors
-          //   });
-
           // next
           this.router.navigate(['']);
 
           // local storage token
           localStorage.setItem('token', JSON.stringify(res.user?.uid));
+          localStorage.setItem('provider', 'Email');
         } else {
           alert('Please verify your email!');
           this.router.navigate(['login']);
@@ -165,6 +123,7 @@ export class AccountService {
     this.fireauth.signOut().then(
       () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('provider');
       },
       (err) => {
         alert(err.message);
@@ -200,10 +159,70 @@ export class AccountService {
   //sign in with google
   googleSignIn() {
     return this.fireauth.signInWithPopup(new GoogleAuthProvider()).then(
-      (res) => {
-        console.log(res);
-        this.router.navigate(['']);
-        localStorage.setItem('token', JSON.stringify(res.user?.uid));
+      async (res) => {
+        if (res.user?.emailVerified == true) {
+          //đăng nhập thành công, kiểm tra xem customer này có trong collection customer chưa
+          const docRefCustomer = firebase
+            .firestore()
+            .doc('Customer/' + res.user?.uid);
+          docRefCustomer
+            .get()
+            .then(
+              (
+                docSnapshot: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>
+              ) => {
+                if (docSnapshot.exists) {
+                  // Nếu có rồi thì thôi
+                } else {
+                  //Nếu chưa có thì tạo mới
+                  const myDoc = this.fireStore
+                    .collection('/Customer')
+                    .doc(res.user?.uid);
+
+                  // const subCollection = myDoc.collection('cart').ref;
+
+                  const customer = new User(); //Tạo mới customer theo cấu trúc của Customer
+
+                  const customerMeta = {
+                    id: res.user?.uid,
+                    userName: res.user?.email,
+                    fullName: customer.fullName,
+                    phone: customer.phone,
+                    address: customer.address,
+                    wishlist: customer.wishlist,
+                    order: customer.order,
+                    // cart: customer.cart,
+                  };
+
+                  // subCollection.set()
+
+                  myDoc
+                    .set(customerMeta)
+                    .then(() => {
+                      console.log('Document successfully written!');
+                    })
+                    .catch((error) => {
+                      console.error('Error writing document: ', error);
+                    });
+
+                  this.router.navigate(['account-info']);
+                }
+              }
+            )
+            .catch((error: Error) => {
+              // Handle errors
+            });
+
+          // next
+          this.router.navigate(['']);
+
+          // local storage token
+          localStorage.setItem('token', JSON.stringify(res.user?.uid));
+          localStorage.setItem('provider', 'Google');
+        } else {
+          alert('Please verify your email!');
+          this.router.navigate(['login']);
+        }
       },
       (err) => {
         alert(err.message);
@@ -234,6 +253,7 @@ export class AccountService {
           // Update the user's password
           await user.updatePassword(newPasswordHash);
           console.log('Password updated successfully');
+          alert('Password updated successfully');
         } else {
           console.log('User email is not verified');
         }

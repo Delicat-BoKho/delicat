@@ -46,6 +46,7 @@
             href="#list-password"
             role="tab"
             aria-controls="list-password"
+            *ngIf="!isGoogleUser"
             >Change password</a
           >
           <a
@@ -149,6 +150,7 @@
             id="list-password"
             role="tabpanel"
             aria-labelledby="list-password-list"
+            *ngIf="!isGoogleUser"
           >
             <form action="#" class="row g-3" id="form_infor" dmethod="POST">
               <h4>CHANGE PASSWORD</h4>
